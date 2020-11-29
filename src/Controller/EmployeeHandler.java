@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
+import javax.swing.text.View;
+
 import Main.DatabaseConnection;
 import Model.Employee;
 import View.EmployeeView;
@@ -16,13 +18,14 @@ public class EmployeeHandler {
 	private Employee model;
 	DatabaseConnection c = new DatabaseConnection();
 	Vector<String> v = new Vector<>();
-	
-	public EmployeeHandler(EmployeeView view, Employee model) {
-		this.view = view;
-		this.model = model;
-	}
 
+	public void viewManageEmployeeForm() {
+		view = new EmployeeView();
+	}
+	
 	public boolean createEmployee(int roleId, String name, String DOB, String email, String password, String status) {
+		model = new Employee();
+		
 		if (validateFields(name, DOB, email) == true) {
 			model.createAccount(roleId, name, Date.valueOf(DOB), email, password, status);
 			return true;
@@ -64,6 +67,7 @@ public class EmployeeHandler {
 		
 		for (int i = 0; i < v.size(); i++) {
 			if (email == v.get(i)) {
+				view.displayErrorMsg("Email already Exist");
 				return false;
 			}
 		}
@@ -72,6 +76,7 @@ public class EmployeeHandler {
 	}
 	
 	public boolean changeStatus(int id) {
+		model = new Employee();
 		
 		model.changeStatus(id);
 		

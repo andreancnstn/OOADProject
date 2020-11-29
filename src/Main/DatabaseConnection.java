@@ -22,7 +22,6 @@ public class DatabaseConnection {
 			
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectooad", "root", "");
 			statement = connection.createStatement();
-			System.out.println("koneksi oke");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,6 +62,20 @@ public class DatabaseConnection {
 	public void update(String query) {
 		try {
 			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	 
+	public void addFood(String name, int price, String description) {
+		try {
+			preparedStatement = connection.prepareStatement("INSERT INTO food (name, price, description, status) VALUES (?,?,?,?)");
+			preparedStatement.setString(1, name);
+			preparedStatement.setInt(2, price);
+			preparedStatement.setString(3, description);
+			preparedStatement.setString(4, "available");
+			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

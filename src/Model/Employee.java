@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.util.Vector;
 
 import Main.DatabaseConnection;
 
@@ -38,6 +39,13 @@ public class Employee {
 		c.update("UPDATE employee SET status='Inactive' WHERE id=" + id );
 		
 		return true;
+	}
+	
+	public Vector<Employee> viewAll() {
+		
+		Vector<Employee> v = null;
+		
+		return v;
 	}
 
 }

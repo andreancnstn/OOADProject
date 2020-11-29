@@ -160,9 +160,11 @@ public class EmployeeView extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource() == hirebtn) {
 			hire();
+			loadManageEmployeeData();
 		}
 		else if(e.getSource() == firebtn) {
 			fire();
+			loadManageEmployeeData();
 		}
 	}
 	
@@ -170,20 +172,21 @@ public class EmployeeView extends JFrame implements ActionListener{
 		JOptionPane.showMessageDialog(this, msg);
 	}
 	
-	Employee employee = new Employee();
-	EmployeeHandler eh = new EmployeeHandler(this, employee);
 	
 	void hire() {
+		EmployeeHandler eh = new EmployeeHandler();
+		
 		Role role = new Role();
 		int roleId = role.getRoleId(rolefield.getSelectedItem().toString());
 		
 		if(eh.createEmployee(roleId, namefield.getText(), dobfield.getText(), emailfield.getText(), passwordfield.getText(), "Active") == true) {
 			displayErrorMsg("Employee succesfully created");
-			loadManageEmployeeData();
 		}
 	}
 	
 	void fire() {
+		EmployeeHandler eh = new EmployeeHandler();
+		
 		dialogBoxPanel = new JPanel();
 		dialogBoxPanel.setSize(new Dimension(250,100));
 		dialogBoxPanel.setLayout(null);
@@ -204,7 +207,6 @@ public class EmployeeView extends JFrame implements ActionListener{
 			try {
 				c.resultSet.next();
 				employeeId = c.resultSet.getInt("id");
-//				System.out.println(employeeId);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -212,7 +214,6 @@ public class EmployeeView extends JFrame implements ActionListener{
 			
 			if (eh.changeStatus(employeeId)) {
 				displayErrorMsg("Employee Fired!!");
-				loadManageEmployeeData();
 			}
 			
 		}
