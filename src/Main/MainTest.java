@@ -13,6 +13,7 @@ import Controller.EmployeeHandler;
 import Controller.FoodHandler;
 import View.EmployeeView;
 import View.FoodView;
+import View.MenuView;
 
 public class MainTest extends JFrame implements ActionListener{
 	
@@ -25,25 +26,25 @@ public class MainTest extends JFrame implements ActionListener{
 	public MainTest() {
 //		DatabaseConnection connection = new DatabaseConnection(); //db connection oke
 		
-		menuPanel = new JPanel();
-		menuPanel.setLayout(new BorderLayout(0,0));
-		setContentPane(menuPanel);
+//		menuPanel = new JPanel();
+//		menuPanel.setLayout(new BorderLayout(0,0));
+//		setContentPane(menuPanel);
+//		
+//		btnPanel = new JPanel(new GridLayout(1,2));
+//		menuPanel.add(btnPanel, BorderLayout.CENTER);
+//		
+//		employeeBtn = new JButton("Employee");
+//		employeeBtn.addActionListener(this);
+//		foodBtn = new JButton("Food");
+//		foodBtn.addActionListener(this);
+//		
+//		
+//		btnPanel.add(employeeBtn);
+//		btnPanel.add(foodBtn);
+//		
+//		init();
 		
-		btnPanel = new JPanel(new GridLayout(1,2));
-		menuPanel.add(btnPanel, BorderLayout.CENTER);
-		
-		employeeBtn = new JButton("Employee");
-		employeeBtn.addActionListener(this);
-		foodBtn = new JButton("Food");
-		foodBtn.addActionListener(this);
-		
-		
-		btnPanel.add(employeeBtn);
-		btnPanel.add(foodBtn);
-		
-		init();
-		
-		
+		MenuView v = new MenuView();
 	}
 
 	public static void main(String[] args) {

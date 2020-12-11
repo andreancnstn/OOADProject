@@ -67,4 +67,22 @@ public class FoodHandler {
 		
 		return true;
 	}
+	
+	public boolean checkStatus(Food f) {
+		
+		return true;
+	}
+	
+	public Food getFood(int foodId) {
+		
+		Food f = null;
+		
+		return f;
+	}
+	
+	public int getFoodID(String foodName) {
+		int id = fModel.getFoodID(foodName);
+		
+		return id;
+	}
 }
