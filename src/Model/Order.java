@@ -28,12 +28,12 @@ public class Order {
 		this.status = status;
 		//		this.c = c;
 	}
-	
-	public boolean addOrder(int orderId, Date date, String address, int userId, int driverId, String status)/*(User user, Date date)*/ {
-		c.addOrder(orderId, date, address, userId, driverId, status);
-		return true;
-		
-	}
+
+	//TODO User model
+//	public boolean addOrder(User user, Date date){
+//		c.addOrder(user,date);
+//		return true;
+//	}
 	
 	public void addDetail(int orderId, int foodId, int qty) {
 		//TODO
