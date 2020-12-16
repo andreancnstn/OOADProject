@@ -45,6 +45,8 @@ public class MainTest extends JFrame implements ActionListener{
 //		init();
 		
 		MenuView v = new MenuView();
+//		FoodView v = new FoodView();
+//		EmployeeView v = new EmployeeView();
 	}
 
 	public static void main(String[] args) {
