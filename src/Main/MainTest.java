@@ -14,6 +14,7 @@ import Controller.FoodHandler;
 import View.EmployeeView;
 import View.FoodView;
 import View.MenuView;
+import View.AvailableOrdersView;
 
 public class MainTest extends JFrame implements ActionListener{
 	
@@ -44,9 +45,10 @@ public class MainTest extends JFrame implements ActionListener{
 //		
 //		init();
 		
-		MenuView v = new MenuView();
+//		MenuView v = new MenuView();
 //		FoodView v = new FoodView();
 //		EmployeeView v = new EmployeeView();
+		AvailableOrdersView ov = new AvailableOrdersView();
 	}
 
 	public static void main(String[] args) {
