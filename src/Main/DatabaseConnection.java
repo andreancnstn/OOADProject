@@ -104,7 +104,7 @@ public class DatabaseConnection {
 	
 	public void addOrder(User user, java.sql.Date date) {
 		//TODO ini udh bener begini ga sih cara masukinnya ._.
-		//TODO error. karena date nya kayaknya. gmn ya.
+		//TODO error. karena date nya kayaknya. gmn ya.	
 		String addresss = user.getAddress();
 		int userIdd = user.getUserId();
 		String statuss = "Available";

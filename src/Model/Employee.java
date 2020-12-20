@@ -41,7 +41,7 @@ public class Employee {
 		return true;
 	}
 	
-	public Vector<Employee> viewAll() {
+	public Vector<Employee> viewAll(int roleId) {
 		
 		Vector<Employee> v = null;
 		
