@@ -81,4 +81,22 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addOrder(int userId, Date date) {
+		try {
+			//TODO
+			preparedStatement = connection.prepareStatement("INSERT INTO order (orderId, date, address, userId, driverId, status) VALUES (?,?,?,?,?,?)");
+//			preparedStatement.setInt(1, orderId);
+			preparedStatement.setDate(2, date);
+//			preparedStatement.setString(3, address);
+			preparedStatement.setInt(4, userId);
+//			preparedStatement.setInt(5, driverId);
+//			preparedStatement.setString(6, status);
+			
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
