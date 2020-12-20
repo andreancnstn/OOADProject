@@ -47,6 +47,25 @@ public class Order {
 	
 	public Order getOne(int orderId) {
 		Order ord = null;
+		
+		c.resultSet = c.query("SELECT * FROM tblorder WHERE orderId=" + orderId);
+		
+		try {
+			while(c.resultSet.next() == true) {
+				for (int i = 0; i <= c.metaData.getColumnCount(); i++) {
+					int orderIdd = c.resultSet.getInt(1);
+					Date datee = c.resultSet.getDate(2);
+					String addresss = c.resultSet.getString(3);
+					int userIdd = c.resultSet.getInt(4);
+					int driverIdd = c.resultSet.getInt(5);
+					String statuss = c.resultSet.getString(6);
+					ord = new Order(orderIdd, datee, addresss, userIdd, driverIdd, statuss);
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
 		//TODO
 		return ord;
 		
@@ -75,7 +94,7 @@ public class Order {
 		Vector<Order> allOrder = new Vector<Order>();
 		Order ordd = null;
 		
-		c.resultSet = c.query("SELECT * FROM order");
+		c.resultSet = c.query("SELECT * FROM tblorder");
 		
 		try {
 			while(c.resultSet.next() == true) {
@@ -97,8 +116,31 @@ public class Order {
 		
 		return allOrder;
 	}
+	
 	public Vector<Order> viewDetailById(int orderId) { // diagram: return list<orderdetail>
 		Vector<Order> viewDetail = new Vector<Order>();
+		Order ordd = null;
+		
+		c.resultSet = c.query("SELECT * FROM tblorder WHERE orderId=" + orderId);
+		
+		try {
+			while(c.resultSet.next() == true) {
+				for (int i = 0; i <= c.metaData.getColumnCount(); i++) {
+					int orderIdd = c.resultSet.getInt(1);
+					Date datee = c.resultSet.getDate(2);
+					String addresss = c.resultSet.getString(3);
+					int userIdd = c.resultSet.getInt(4);
+					int driverIdd = c.resultSet.getInt(5);
+					String statuss = c.resultSet.getString(6);
+					ordd = new Order(orderIdd, datee, addresss, userIdd, driverIdd, statuss);
+				}
+				viewDetail.add(ordd);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		
 		return viewDetail;
 	}
 	

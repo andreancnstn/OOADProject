@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Vector;
 
 import Model.Food;
 import Model.Order;
@@ -67,8 +68,9 @@ public class OrderHandler {
 		return null;
 		
 	}
-	public List viewDetailById(int orderId) {
-		return null;
+	public Vector<Order> viewDetailById(int orderId) {
+		Vector<Order> order = o.viewDetailById(orderId);
+		return order;
 		
 	}
 	public boolean updateStatus(int orderId, String status) {
