@@ -14,9 +14,9 @@ public class User {
 	
 	DatabaseConnection c = new DatabaseConnection();
 	
-	public User(String name, String address, String email, String phoneNumber, String password) {
+	public User(int userId, String name, String address, String email, String phoneNumber, String password) {
 		super();
-//		this.userId = userId;
+		this.userId = userId;
 		this.name = name;
 		this.address = address;
 		this.email = email;
@@ -24,6 +24,10 @@ public class User {
 		this.password = password;
 	}
 	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
 	//di classdiagramnya dia minta param userId. hmm 
 	public boolean createUserAccount(/*int userId, */String name, String address, String email, String phoneNumber, String password) {
 		c.createUserAccount(/*userId, */name, address, email, phoneNumber, password);

@@ -15,7 +15,8 @@ public class Driver extends Employee{
 	
 	DatabaseConnection c = new DatabaseConnection();
 	
-	public void createDriver() {
+	//createDriver hrsnya terima 2 param : employeeId plateNumber
+	public void createDriver(int employeeId, String licensePlate) {
 		c.createDriver(employeeId, licensePlate);
 	}
 

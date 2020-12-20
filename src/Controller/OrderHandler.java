@@ -22,10 +22,6 @@ public class OrderHandler {
 	}
 	
 	public boolean addOrder(User user) {
-		//TODO error nih, kayaknya gara2 date nya, gmn ya
-//		Date date = new Date();
-//		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		
 		long millis=System.currentTimeMillis();  
         java.sql.Date sqlDate=new java.sql.Date(millis);  
 
@@ -78,7 +74,8 @@ public class OrderHandler {
 		
 	}
 	public boolean takeOrder(int orderId, int driverId) {
-		return false;
+		o.takeOrder(orderId, driverId);
+		return true;
 		
 	}
 	

@@ -71,13 +71,14 @@ public class Order {
 		
 	}
 	public boolean updateStatus(int orderId, String status) {
-		//-	Must be either “accepted”, “ordered” or “finished”
-		c.update("UPDATE order SET status='"+ status +"' WHERE orderID=" + orderId);
+		//accepted, ordered, cooked, finished
+		c.update("UPDATE order SET status='"+ status +"' WHERE orderId=" + orderId); //TODO fix syntax
 		return true;
 		
 	}
 	public boolean takeOrder(int orderId, int driverId) {
-		//TODO
+		updateStatus(orderId, "Accepted");
+		c.update("UPDATE order SET driverId='"+ driverId +"' WHERE orderId=" + orderId); //TODO fix syntax
 		return true;
 		
 	}
@@ -90,7 +91,7 @@ public class Order {
 		//TODO
 	}
 	
-	public Vector<Order> getAll() { //di diagramnya list<order> tp ini bikin vector. Gapapah?
+	public Vector<Order> getAll() {
 		Vector<Order> allOrder = new Vector<Order>();
 		Order ordd = null;
 		

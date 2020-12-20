@@ -21,6 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.FoodHandler;
+import Controller.OrderHandler;
 import Main.DatabaseConnection;
 
 public class AvailableOrdersView extends JFrame implements ActionListener {
@@ -48,14 +49,6 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 		panel1.add(panelBtn, BorderLayout.SOUTH);
 		panel.setLayout(null);
 		
-		judulLbl = new JLabel("Input orderId to take order");
-		judulLbl.setBounds(262, 360, 300, 30);
-		
-		orderIdLbl = new JLabel("orderId");
-		orderIdLbl.setBounds(20, 400, 200, 25);
-		
-		orderIdTxt = new JTextField();
-		orderIdTxt.setBounds(120, 400, 460, 25);
 
 		takeOrderBtn = new JButton("Take Order");
 		takeOrderBtn.addActionListener(this);
@@ -68,11 +61,6 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 		scrollPane.setBounds(0, 20, 600, 330);
 		
 		panelBtn.add(takeOrderBtn);
-		
-		panel.add(judulLbl);
-		panel.add(orderIdLbl);
-
-		panel.add(orderIdTxt);
 
 		panel.add(scrollPane);
 		
@@ -89,20 +77,37 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO : orderhandler takeorder()
-//		OrderHandler oh = new OrderHandler();
+		OrderHandler oh = new OrderHandler();
+//		UserHandler uh = new UserHandler();
 		if (e.getSource() == takeOrderBtn) {
-			int orderid = 0;
-			try {
-				orderid = Integer.parseInt(orderIdTxt.getText());
-			} catch (Exception e2) {
-				// TODO: handle exception
-				displayMsg(" orderId must be number !");
+			
+			dialogBoxPanel = new JPanel();
+			dialogBoxPanel.setSize(new Dimension(250,100));
+			dialogBoxPanel.setLayout(null);
+			
+			int row = table.getSelectedRow();
+			
+			String orderidd = "" + table.getValueAt(row, 0);
+			
+			JLabel dialogText = new JLabel("Want to take this order? (OrderId: " + orderidd + ")");
+			dialogText.setBounds(75,45,300,30);
+			dialogBoxPanel.add(dialogText);
+			
+			UIManager.put("OptionPane.minimumSize", new Dimension(400,200));
+			int result = JOptionPane.showConfirmDialog(null, dialogBoxPanel, "File", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+		
+			switch(result) {
+			case 0: // TODO : orderhandler takeorder()
+				if (oh.takeOrder(Integer.parseInt(orderidd), 2)){ //TODO: agar '2' nya diganti driverId yang nerima order.. how..
+					displayMsg("Order succesfully taken!");
+				}
+				//TODO user handler method
+				//   uh.viewUserInformation();
+				break;
+			case 1:
+				loadAvailableOrders();
+				break;
 			}
-//			if (oh.takeOrder(orderIdTxt.getText()/*TODO: , DRIVERID*/)) {
-//				displayMsg("Order taken");
-				// 	TODO : oh.viewTakenOrder();//CurrentOrderView v = new CurrentOrderView;
-//			}
 		}
 		
 	}

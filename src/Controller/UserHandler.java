@@ -7,7 +7,7 @@ import Model.User;
 public class UserHandler {
 	
 	public boolean createAccount(String name, String address, String email, String phoneNumber, String password) {
-		User u = new User(password, password, password, password, password);
+		User u = new User();
 		u.createUserAccount(/*userId, */name, address, email, phoneNumber, password);
 		return true;
 	}

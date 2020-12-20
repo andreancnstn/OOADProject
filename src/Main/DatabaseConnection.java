@@ -103,11 +103,10 @@ public class DatabaseConnection {
 	}
 	
 	public void addOrder(User user, java.sql.Date date) {
-		//TODO ini udh bener begini ga sih cara masukinnya ._.
-		//TODO error. karena date nya kayaknya. gmn ya.	
 		String addresss = user.getAddress();
 		int userIdd = user.getUserId();
-		String statuss = "Available";
+		String statuss = "Not accepted"; //belom diambil driver
+						//Di tblorder, ganti lengthnya STATUS jadi VARCHAR(13)
 		
 		try {
 			//TODO
@@ -151,4 +150,5 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 	}
+
 }

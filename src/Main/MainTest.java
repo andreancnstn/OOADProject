@@ -13,6 +13,7 @@ import Controller.EmployeeHandler;
 import Controller.FoodHandler;
 import Controller.OrderHandler;
 import Controller.UserHandler;
+import Model.Driver;
 import Model.User;
 import View.EmployeeView;
 import View.FoodView;
@@ -55,13 +56,24 @@ public class MainTest extends JFrame implements ActionListener{
 //		FoodView v = new FoodView();
 //		EmployeeView v = new EmployeeView();
 		
-		simulasiBikinFood(); //bikin 2 jenis food masukin db
-		simulasiBikinUser(); //bikin user masukin db + bikin object user
-		simulasiMasukinOrder(); //bikin order masukin db
-		simulasiMasukinOrderDetails(); //bikin 2 order details untuk si order
+		//INIT UNTUK VIEW AVAILABLE ORDERS
+		simulasiBikinFood();					//	BUTUH VIEW:
+		simulasiBikinUser();					//		REGISTER USER
+		simulasiMasukinOrder();					// 		CART CHECKOUT
+		simulasiMasukinOrderDetails();			// 		CART CHECKOUT
+		//INIT UNTUK PENCET TAKE ORDER
+		simulasiBikinDriver();					//		REGISTER DRIVER
 
-		AvailableOrdersView ov = new AvailableOrdersView(); //coba liat ordernya udh masuk belom
-//		OrderDetailsView odv = new OrderDetailsView(); // coba liat ordernya pny order details dah bisa blm
+		AvailableOrdersView ov = new AvailableOrdersView();		// BUTUH VIEW ' VIEW USER INFO '
+//		OrderDetailsView odv = new OrderDetailsView();
+	}
+
+	private void simulasiBikinDriver() {
+		// TODO Auto-generated method stub
+		Driver d = new Driver("B 4678 TY", 1);
+		d.createDriver(1,"B 1111 TY");
+		d.createDriver(2,"B 2222 TY");
+		d.createDriver(1,"B 3333 TY");
 	}
 
 	private void simulasiBikinFood() {
@@ -75,7 +87,7 @@ public class MainTest extends JFrame implements ActionListener{
 		UserHandler uh = new UserHandler();
 //		uh.createAccount(name, address, email, phoneNumber, password);
 		uh.createAccount("Budiman", "Jalan Mangga no.3", "budi_man@gmail.com", "0812345678", "inipasswordbudi");
-		userModelTes = new User("Budiman", "Jalan Mangga no.3", "budi_man@gmail.com", "0812345678", "inipasswordbudi");
+		userModelTes = new User(105,"Budiman", "Jalan Mangga no.3", "budi_man@gmail.com", "0812345678", "inipasswordbudi");
 	}
 
 	private void simulasiMasukinOrder() {
