@@ -82,5 +82,12 @@ public class EmployeeHandler {
 		
 		return true;
 	}
+	
+	public Vector<Employee> viewAll(int roleId) {
+		
+		Vector<Employee> em = new Vector<Employee>();
+		
+		return em;
+	}
 
 }

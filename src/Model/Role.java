@@ -26,5 +26,22 @@ public class Role {
 		}
 		return roleid;
 	}
+	
+	public int getEmpId (String email) {
+		
+		ResultSet set = connection.query("SELECT id FROM employee WHERE email='" + email + "' LIMIT 1");
+		
+		int empId = 0;
+		try {
+			if (set.next()) {
+				empId = set.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(empId);
+		return empId;
+	}
 
 }

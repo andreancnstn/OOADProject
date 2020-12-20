@@ -1,12 +1,22 @@
 package Model;
 
-import java.sql.Date;
+import Main.DatabaseConnection;
 
 public class Driver extends Employee{
+	
+	private String licensePlate;
+	private Integer employeeId;
 
-//	public Driver(int roleId, String name, Date dOB, String email, String password, String status) {
-//		super(roleId, name, dOB, email, password, status);
-//		// TODO Auto-generated constructor stub
-//	}
+	public Driver(String licensePlate, Integer employeeId) {
+		super();
+		this.licensePlate = licensePlate;
+		this.employeeId = employeeId;
+	}
+	
+	DatabaseConnection c = new DatabaseConnection();
+	
+	public void createDriver() {
+		c.createDriver(employeeId, licensePlate);
+	}
 
 }

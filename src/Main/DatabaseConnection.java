@@ -59,6 +59,20 @@ public class DatabaseConnection {
 		}
 	}
 	
+	public void createDriver(int employeeId, String lPlate) {
+		try {
+			preparedStatement = connection.prepareStatement("INSERT INTO driver (employeeId, licensePlate) VALUES (?,?)");
+			preparedStatement.setInt(1, employeeId);
+			preparedStatement.setString(2, lPlate);
+			
+			preparedStatement.execute();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void update(String query) {
 		try {
 			statement.executeUpdate(query);

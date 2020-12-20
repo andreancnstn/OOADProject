@@ -26,13 +26,14 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.EmployeeHandler;
 import Main.DatabaseConnection;
+import Model.Driver;
 import Model.Employee;
 import Model.Role;
 
 public class EmployeeView extends JFrame implements ActionListener{
 	JPanel contentPanel, panel, buttonPanel, dialogBoxPanel; 
-	JLabel rolelabel, namelabel, doblabel, emaillabel, passwordlabel, statuslabel;
-	JTextField namefield, dobfield, emailfield, passwordfield;
+	JLabel rolelabel, namelabel, doblabel, emaillabel, passwordlabel, statuslabel, lPlatelabel;
+	JTextField namefield, dobfield, emailfield, passwordfield, lPlateField;
 	JButton hirebtn, firebtn;
 	JComboBox<String> statusfield, rolefield;
 	JTable table;
@@ -65,8 +66,11 @@ public class EmployeeView extends JFrame implements ActionListener{
 		emaillabel.setBounds(10, 360, 100, 25);
 		passwordlabel = new JLabel("Password");
 		passwordlabel.setBounds(10, 400, 100, 25);
-		statuslabel = new JLabel("Status");
-		statuslabel.setBounds(10, 440, 100, 25);
+//		statuslabel = new JLabel("Status");
+//		statuslabel.setBounds(10, 440, 100, 25);
+		lPlatelabel = new JLabel("Licene Plate");
+		lPlatelabel.setBounds(10, 440, 100, 25);
+		lPlatelabel.setVisible(false);
 		
 		hirebtn = new JButton("HIRE");
 		hirebtn.addActionListener(this);
@@ -80,6 +84,7 @@ public class EmployeeView extends JFrame implements ActionListener{
 		
 		rolefield = new JComboBox<String>(roleList);
 		rolefield.setBounds(110, 240, 300, 25);
+		rolefield.addActionListener(this);
 		namefield = new JTextField();
 		namefield.setBounds(110, 280, 300, 25);
 		dobfield = new JTextField("YYYY-MM-DD");
@@ -88,13 +93,16 @@ public class EmployeeView extends JFrame implements ActionListener{
 		emailfield.setBounds(110, 360, 300, 25);
 		passwordfield = new JPasswordField();
 		passwordfield.setBounds(110, 400, 300, 25);
+		lPlateField = new JTextField();
+		lPlateField.setBounds(110,  440, 300, 25);
+		lPlateField.setVisible(false);
 		
-		statusList = new Vector<>();
-		statusList.add("Please select a status");
-		statusList.add("Active");
-		statusList.add("Fired");
-		statusfield = new JComboBox<String>(statusList);
-		statusfield.setBounds(110, 440, 300, 25);
+//		statusList = new Vector<>();
+//		statusList.add("Please select a status");
+//		statusList.add("Active");
+//		statusList.add("Fired");
+//		statusfield = new JComboBox<String>(statusList);
+//		statusfield.setBounds(110, 440, 300, 25);
 		
 		table = new JTable();
 		loadManageEmployeeData();
@@ -107,6 +115,7 @@ public class EmployeeView extends JFrame implements ActionListener{
 		panel.add(doblabel);
 		panel.add(emaillabel);
 		panel.add(passwordlabel);
+		panel.add(lPlatelabel);
 //		panel.add(statuslabel);
 		
 		panel.add(rolefield);
@@ -114,11 +123,17 @@ public class EmployeeView extends JFrame implements ActionListener{
 		panel.add(dobfield);
 		panel.add(emailfield);
 		panel.add(passwordfield);
+		panel.add(lPlateField);
 //		panel.add(statusfield);
 		panel.add(scrollPane);
 		
 		buttonPanel.add(hirebtn);
 		buttonPanel.add(firebtn);
+		
+//		if (rolefield.getSelectedItem().toString().equals("Driver")) {
+//			lPlatelabel.setVisible(true);
+//			lPlateField.setVisible(true);
+//		}
 		
 		init();
 	}
@@ -166,12 +181,21 @@ public class EmployeeView extends JFrame implements ActionListener{
 			fire();
 			loadManageEmployeeData();
 		}
+		else if (e.getSource() == rolefield) {
+			if (rolefield.getSelectedItem().toString().equals("Driver")) {
+				lPlatelabel.setVisible(true);
+				lPlateField.setVisible(true);
+			}
+		}
 	}
 	
+	private void inputdriver() {
+		
+	}
+
 	public void displayErrorMsg(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
 	}
-	
 	
 	void hire() {
 		EmployeeHandler eh = new EmployeeHandler();
@@ -180,6 +204,11 @@ public class EmployeeView extends JFrame implements ActionListener{
 		int roleId = role.getRoleId(rolefield.getSelectedItem().toString());
 		
 		if(eh.createEmployee(roleId, namefield.getText(), dobfield.getText(), emailfield.getText(), passwordfield.getText(), "Active") == true) {
+			// roleId = 2 artinya Driver, dilihat dari table role
+			if (roleId == 2) {
+				Driver d = new Driver(lPlateField.getText().toString(), role.getEmpId(emailfield.getText()));
+				d.createDriver();
+			}
 			displayErrorMsg("Employee succesfully created");
 		}
 	}
