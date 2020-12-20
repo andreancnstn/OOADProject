@@ -98,5 +98,19 @@ public class DatabaseConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void addDetail(int orderId, int foodId, int qty) {
+		try {
+			preparedStatement = connection.prepareStatement("INSERT INTO orderdetail (orderId,foodId,qty) VALUES (?,?,?)");
+			preparedStatement.setInt(1, orderId);
+			preparedStatement.setInt(2, foodId);
+			preparedStatement.setInt(3, qty);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
