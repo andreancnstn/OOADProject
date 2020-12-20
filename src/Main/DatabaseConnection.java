@@ -111,13 +111,13 @@ public class DatabaseConnection {
 		
 		try {
 			//TODO
-			preparedStatement = connection.prepareStatement("INSERT INTO order (date, address, userId, status) VALUES (?,?,?,?)");
+			preparedStatement = connection.prepareStatement("INSERT INTO tblorder (date, address, userId, driverId, status) VALUES (?,?,?,?,?)");
 //			preparedStatement.s	etInt(1, orderIdd); //autoincrement
 			preparedStatement.setDate(1, date);
 			preparedStatement.setString(2, addresss);
 			preparedStatement.setInt(3, userIdd);
-//			preparedStatement.setInt(4, driverId); //not taken by driver yet
-			preparedStatement.setString(4, statuss); 
+			preparedStatement.setInt(4, 0); //not taken by driver yet
+			preparedStatement.setString(5, statuss); 
 			
 			preparedStatement.execute();
 		} catch (SQLException e) {
