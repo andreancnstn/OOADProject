@@ -1,12 +1,9 @@
 package Model;
 
-import java.util.List;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import Main.DatabaseConnection;
-import View.FoodView;
 
 public class Food {
 	
@@ -142,12 +139,12 @@ public class Food {
 				}
 				v.add(f);
 			}
+			return v;
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 		}
-		
-		return v;
+		return null;
 	}
 	
 	public int getFoodID (String foodName) {
