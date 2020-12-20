@@ -31,6 +31,7 @@ public class DatabaseConnection {
 	
 	public ResultSet query(String q) {
 		try {
+			statement = connection.createStatement();
 			resultSet = statement.executeQuery(q);
 			metaData = resultSet.getMetaData();
 		} catch (SQLException e) {
@@ -99,4 +100,17 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 	}
+	
+	public PreparedStatement prepareStatement(String query) {
+		preparedStatement = null;
+		
+		try {
+			preparedStatement = connection.prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return preparedStatement;
+	}
+	
 }

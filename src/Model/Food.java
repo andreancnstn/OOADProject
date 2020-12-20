@@ -12,7 +12,7 @@ public class Food {
 	
 	private int foodId;
 	private String name;
-	private int price;
+	private Integer price;
 	private String description;
 	private String status;
 	
@@ -47,7 +47,7 @@ public class Food {
 		this.foodId = foodId;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
