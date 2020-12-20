@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+
+import Model.User;
 
 public class DatabaseConnection {
 	
@@ -58,6 +61,23 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 	}
+	public void createUserAccount(/*int userId, */String name, String address, String email, String phoneNumber, String password) {
+		try {
+			preparedStatement = connection.prepareStatement("INSERT INTO tbluser (name, address, email, phoneNumber, password) VALUES (?,?,?,?,?)");
+//			preparedStatement.setInt(1, userId); //autoincrement
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, address);
+			preparedStatement.setString(3, email);
+			preparedStatement.setString(4, phoneNumber);
+			preparedStatement.setString(5, password);
+			
+			
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void update(String query) {
 		try {
@@ -82,16 +102,22 @@ public class DatabaseConnection {
 		}
 	}
 	
-	public void addOrder(int userId, Date date) {
+	public void addOrder(User user, java.sql.Date date) {
+		//TODO ini udh bener begini ga sih cara masukinnya ._.
+		//TODO error. karena date nya kayaknya. gmn ya.
+		String addresss = user.getAddress();
+		int userIdd = user.getUserId();
+		String statuss = "Available";
+		
 		try {
 			//TODO
-			preparedStatement = connection.prepareStatement("INSERT INTO order (orderId, date, address, userId, driverId, status) VALUES (?,?,?,?,?,?)");
-//			preparedStatement.setInt(1, orderId);
-			preparedStatement.setDate(2, date);
-//			preparedStatement.setString(3, address);
-			preparedStatement.setInt(4, userId);
-//			preparedStatement.setInt(5, driverId);
-//			preparedStatement.setString(6, status);
+			preparedStatement = connection.prepareStatement("INSERT INTO order (date, address, userId, status) VALUES (?,?,?,?)");
+//			preparedStatement.s	etInt(1, orderIdd); //autoincrement
+			preparedStatement.setDate(1, date);
+			preparedStatement.setString(2, addresss);
+			preparedStatement.setInt(3, userIdd);
+//			preparedStatement.setInt(4, driverId); //not taken by driver yet
+			preparedStatement.setString(4, statuss); 
 			
 			preparedStatement.execute();
 		} catch (SQLException e) {

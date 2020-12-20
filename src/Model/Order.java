@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Vector;
 import Main.DatabaseConnection;
 
@@ -29,14 +30,19 @@ public class Order {
 		//		this.c = c;
 	}
 
-	//TODO User model
-//	public boolean addOrder(User user, Date date){
-//		c.addOrder(user,date);
-//		return true;
-//	}
+
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public boolean addOrder(User user, java.sql.Date date){
+		c.addOrder(user,date);
+		return true;
+	}
 	
 	public void addDetail(int orderId, int foodId, int qty) {
-		//TODO
+		c.addDetail(orderId, foodId, qty);
 	}
 	
 	public Order getOne(int orderId) {

@@ -19,6 +19,10 @@ public class OrderDetail {
 		this.qty = qty;
 	}
 	
+	public OrderDetail() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean addDetail(int orderId, int foodId, int qty) {
 		//TODO perlu validate if exist yang sama persis return false ga ya
 		c.addDetail(orderId, foodId, qty);

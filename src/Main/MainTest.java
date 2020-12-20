@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 
 import Controller.EmployeeHandler;
 import Controller.FoodHandler;
+import Controller.OrderHandler;
+import Controller.UserHandler;
+import Model.User;
 import View.EmployeeView;
 import View.FoodView;
 import View.MenuView;
@@ -24,6 +27,9 @@ public class MainTest extends JFrame implements ActionListener{
 	FoodHandler fh = new FoodHandler();
 	EmployeeHandler eh = new EmployeeHandler();
 
+	User userModelTes = null;
+	
+	
 	public MainTest() {
 //		DatabaseConnection connection = new DatabaseConnection(); //db connection oke
 		
@@ -48,7 +54,41 @@ public class MainTest extends JFrame implements ActionListener{
 //		MenuView v = new MenuView();
 //		FoodView v = new FoodView();
 //		EmployeeView v = new EmployeeView();
-		AvailableOrdersView ov = new AvailableOrdersView();
+		
+		simulasiBikinFood(); //bikin 2 jenis food masukin db
+		simulasiBikinUser(); //bikin user masukin db + bikin object user
+		simulasiMasukinOrder(); //bikin order masukin db
+		simulasiMasukinOrderDetails(); //bikin 2 order details untuk si order
+
+		AvailableOrdersView ov = new AvailableOrdersView(); //coba liat ordernya udh masuk belom
+//		OrderDetailsView odv = new OrderDetailsView(); // coba liat ordernya pny order details dah bisa blm
+	}
+
+	private void simulasiBikinFood() {
+		FoodHandler fh = new FoodHandler();
+//		fh.addFood(name, price, desc);
+		fh.addFood("makanan Satu", 11000, "desc makanan Satu");
+		fh.addFood("maknana dua", 22000, "desc makanan Dua");
+	}
+
+	private void simulasiBikinUser() {
+		UserHandler uh = new UserHandler();
+//		uh.createAccount(name, address, email, phoneNumber, password);
+		uh.createAccount("Budiman", "Jalan Mangga no.3", "budi_man@gmail.com", "0812345678", "inipasswordbudi");
+		userModelTes = new User("Budiman", "Jalan Mangga no.3", "budi_man@gmail.com", "0812345678", "inipasswordbudi");
+	}
+
+	private void simulasiMasukinOrder() {
+		OrderHandler oh= new OrderHandler();
+		oh.addOrder(userModelTes);
+		
+		
+	}
+	private void simulasiMasukinOrderDetails() {
+		OrderHandler oh = new OrderHandler();
+//		oh.addDetail(orderId, foodId, qty);
+		oh.addDetail(1, 1, 5);
+		oh.addDetail(1, 2, 8);
 	}
 
 	public static void main(String[] args) {
