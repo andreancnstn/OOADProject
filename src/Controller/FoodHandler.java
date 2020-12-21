@@ -75,9 +75,7 @@ public class FoodHandler {
 	
 	public Food getFood(int foodId) {
 		
-		Food f = null;
-		
-		return f;
+		return fModel.getFood(foodId);
 	}
 	
 	public int getFoodID(String foodName) {

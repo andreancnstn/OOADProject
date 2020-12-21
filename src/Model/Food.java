@@ -118,6 +118,22 @@ public class Food {
 		
 		Food f = null;
 		
+		c.resultSet = c.query("SELECT * FROM food WHERE foodId=" + foodId);
+		
+		try {
+			while(c.resultSet.next()) {
+				int foodId1 = c.resultSet.getInt(1);
+				String name = c.resultSet.getString(2).toString();
+				int price = c.resultSet.getInt(3);
+				String desc = c.resultSet.getString(4);
+				String status = c.resultSet.getString(5);
+				f = new Food(foodId1, name, price, desc, status);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return f;
 	}
 

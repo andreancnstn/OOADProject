@@ -63,5 +63,4 @@ public class UserLandingPage extends JFrame {
 		});
 		contentPane.add(login);
 	}
-
 }

@@ -105,7 +105,7 @@ public class DatabaseConnection {
 	
 	public void addOrder(User user, java.sql.Date date) {
 		String addresss = user.getAddress();
-		int userIdd = user.getUserId();
+		int userIdd = user.getId();
 		String statuss = "Not accepted"; //belom diambil driver
 						//Di tblorder, ganti lengthnya STATUS jadi VARCHAR(13)
 		
