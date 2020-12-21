@@ -34,6 +34,7 @@ public class TakenOrderView extends JFrame implements ActionListener {
 	
 	JButton viewDetailBtn;
 	JButton orderToChefBtn;
+	JButton deliverBtn;
 	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
@@ -60,10 +61,14 @@ public class TakenOrderView extends JFrame implements ActionListener {
 		//button buat suruh chef masakin orderan (ClickOrderButton)
 		orderToChefBtn = new JButton("Tell Chef To Cook");
 		orderToChefBtn.addActionListener(this);
+		
+		//button buat deliver (if status=cooked change status to delivered)
+		deliverBtn = new JButton("Deliver");
+		deliverBtn.addActionListener(this);
 	
 		
 		table = new JTable();
-		loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Accepted'");
+		loadEntries("SELECT * FROM tblorder WHERE status NOT LIKE 'not accepted'");
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		scrollPane.setBounds(0, 20, 600, 330);
@@ -96,7 +101,24 @@ public class TakenOrderView extends JFrame implements ActionListener {
 			Order ord = oh.getOne(Integer.parseInt(orderidd));
 			DetailsView hdv = new DetailsView(ord);
 		}
-		if (e.getSource() == orderToChefBtn) {
+		if (e.getSource() == deliverBtn) {
+			
+			int row = table.getSelectedRow();
+			String orderidd = "" + table.getValueAt(row, 0);
+			int ord = Integer.parseInt(orderidd);
+			
+			//mengupdate status yg diklik to 'delivered'
+			if(oh.updateStatus(ord, "delivered")) {
+				displayMsg("Success!  Ordered chef to cook!");
+			}
+			else {
+				displayMsg("Order is not cooked yet! Cannot deliver");
+			}
+			
+			
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Accepted'");
+		}
+if (e.getSource() == orderToChefBtn) {
 			
 			int row = table.getSelectedRow();
 			String orderidd = "" + table.getValueAt(row, 0);
