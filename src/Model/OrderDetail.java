@@ -34,7 +34,7 @@ public class OrderDetail {
 		c.update("IF EXISTS ( SELECT 1 FROM orderdetail WHERE orderid ="+orderId+") "
 				+ "BEGIN DELETE FROM orderdetail WHERE orderId="+ orderId + "END");
 		//2.
-		if (true/*TODO orderId exist gmn tulisnya ya*/) {
+		if (orderId != 0 || orderId != -1) {
 			c.update("DELETE FROM orderdetail WHERE orderId=" + orderId);
 			return true;
 		} else {

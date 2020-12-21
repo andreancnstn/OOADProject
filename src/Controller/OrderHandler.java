@@ -43,6 +43,10 @@ public class OrderHandler {
 		return false;
 		
 	}
+	
+	public Integer getOrderIdAfterAdd() {
+		return o.getOrderIdAfterAdd();
+	}
 
 	public void addDetail(int orderId, int foodId, int qty) {
 		od.addDetail(orderId, foodId, qty);

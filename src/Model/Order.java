@@ -234,4 +234,21 @@ public class Order {
 		
 		return null;
 	}
+	
+	public Integer getOrderIdAfterAdd() {
+		Integer id = 0;
+		c.resultSet = c.query("SELECT * FROM tblorder");
+		try {
+			while(c.resultSet.next() == true) {
+				for (int i = 1; i <= c.metaData.getColumnCount(); i++) {
+					id = c.resultSet.getInt("orderId");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
 }

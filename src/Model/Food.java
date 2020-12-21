@@ -146,7 +146,7 @@ public class Food {
 		Vector<Food> v = new Vector<Food>();
 		Food f = null;
 		
-		c.resultSet = c.query("SELECT * FROM food");
+		c.resultSet = c.query("SELECT * FROM food WHERE status='available'");
 		
 		try {
 			while(c.resultSet.next() == true) {
