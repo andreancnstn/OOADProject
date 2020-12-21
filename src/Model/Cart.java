@@ -85,7 +85,7 @@ public class Cart {
 	
 	//remove one item from cart
 	public void removeFromCart(Integer foodId) {
-		String query = String.format("DELETE FROM carts WHERE userId=? && foodId=?");
+		String query = String.format("DELETE FROM cart WHERE userId=? && foodId=?");
 		PreparedStatement ps = con.prepareStatement(query);
 		
 		try {
@@ -99,7 +99,7 @@ public class Cart {
 	
 	//remove all items
 	public void removeAll() {
-		String query = String.format("DELETE FROM carts WHERE userId=?");
+		String query = String.format("DELETE FROM cart WHERE userId=?");
 		PreparedStatement ps = con.prepareStatement(query);
 		
 		try {
