@@ -55,7 +55,6 @@ public class OrderHandler {
 	}
 	
 	public Order getOne(int orderId) {
-		Order o = new Order();
 		return o.getOne(orderId);
 	}
 	
@@ -78,7 +77,8 @@ public class OrderHandler {
 		
 	}
 	public boolean updateStatus(int orderId, String status) {
-		return false;
+		o.updateStatus(orderId, status);
+		return true;
 		
 	}
 	public boolean takeOrder(int orderId, int driverId) {

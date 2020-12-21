@@ -70,15 +70,15 @@ public class Order {
 		return ord;
 		
 	}
-	public boolean updateStatus(int orderId, String status) {
+	public boolean updateStatus(int orderId, String status) { //default status: Not Accepted
 		//accepted, ordered, cooked, finished
-		c.update("UPDATE order SET status='"+ status +"' WHERE orderId=" + orderId); //TODO fix syntax
+		c.update("UPDATE tblorder SET status='"+ status +"' WHERE orderId=" + orderId); //TODO fix syntax
 		return true;
 		
 	}
 	public boolean takeOrder(int orderId, int driverId) {
-		updateStatus(orderId, "Accepted");
-		c.update("UPDATE order SET driverId='"+ driverId +"' WHERE orderId=" + orderId); //TODO fix syntax
+		updateStatus(orderId, "accepted");
+		c.update("UPDATE tblorder SET driverId='"+ driverId +"' WHERE orderId=" + orderId); //TODO fix syntax
 		return true;
 		
 	}

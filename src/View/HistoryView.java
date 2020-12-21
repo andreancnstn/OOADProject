@@ -89,7 +89,7 @@ public class HistoryView extends JFrame implements ActionListener {
 			String orderidd = "" + table.getValueAt(row, 0);
 			
 			Order ord = oh.getOne(Integer.parseInt(orderidd));
-			HistoryDetailView hdv = new HistoryDetailView(ord);
+			DetailsView hdv = new DetailsView(ord);
 		}
 		
 	}

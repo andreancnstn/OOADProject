@@ -25,7 +25,7 @@ import Controller.OrderHandler;
 import Main.DatabaseConnection;
 import Model.Order;
 
-public class HistoryDetailView extends JFrame implements ActionListener {
+public class DetailsView extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	JPanel panel1, panel, panelBtn, dialogBoxPanel;
@@ -40,7 +40,7 @@ public class HistoryDetailView extends JFrame implements ActionListener {
 	
 	Order ord = null;
 	
-	public HistoryDetailView(Order ord) throws HeadlessException {
+	public DetailsView(Order ord) throws HeadlessException {
 		this.ord = ord;
 		
 		// TODO Auto-generated constructor stub
@@ -68,7 +68,7 @@ public class HistoryDetailView extends JFrame implements ActionListener {
 		init();
 	}
 	private void init() {
-		setTitle("View History Details");
+		setTitle("View Details");
 		setVisible(true);
 		setSize(600,600);
 		setLocationRelativeTo(null);
