@@ -164,4 +164,37 @@ public class User {
 		return false;
 	}
 	
+	public User getUserbyId(Integer userId) {
+		try {
+			ResultSet rs = con.query("SELECT * FROM users");
+			
+			while (rs.next()) {
+				
+				Integer Id = rs.getInt("userId");
+				String Name = rs.getString("name");
+				String Address = rs.getString("address");
+				String Email = rs.getString("email");
+				String PhoneNumber = rs.getString("phoneNumber");
+				String Password = rs.getString("password");
+				
+				if(userId.equals(Id)) {
+					User um = new User();
+					
+					um.setId(Id);
+					um.setName(Name);
+					um.setAddress(Address);
+					um.setEmail(Email);
+					um.setPhoneNumber(PhoneNumber);
+					um.setPassword(Password);
+					
+					return um;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }

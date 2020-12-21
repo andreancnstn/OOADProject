@@ -3,6 +3,7 @@ package Main;
 import View.OrderQueueView;
 import View.OrdersView;
 import View.TakenOrderView;
+import View.User.UserInformationView;
 import View.User.UserLandingPage;
 
 public class Main{
@@ -10,6 +11,9 @@ public class Main{
 	public Main() {
 		UserLandingPage u = new UserLandingPage();
 		u.setVisible(true);
+		
+//		UserInformationView uiv = new UserInformationView();
+//		uiv.setVisible(true);
 		
 //		OrdersView ov = new OrdersView();
 //		TakenOrderView tov = new TakenOrderView();
