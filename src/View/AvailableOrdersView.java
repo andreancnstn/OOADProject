@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.FoodHandler;
 import Controller.OrderHandler;
+import Controller.UserHandler;
 import Main.DatabaseConnection;
 
 public class AvailableOrdersView extends JFrame implements ActionListener {
@@ -85,7 +86,7 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		OrderHandler oh = new OrderHandler();
-//		UserHandler uh = new UserHandler();
+		UserHandler uh = new UserHandler();
 		if (e.getSource() == takeOrderBtn) {
 			
 			dialogBoxPanel = new JPanel();
@@ -95,6 +96,7 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 			int row = table.getSelectedRow();
 			
 			String orderidd = "" + table.getValueAt(row, 0);
+			String useridd = "" + table.getValueAt(row, 3); 
 			
 			JLabel dialogText = new JLabel("Want to take this order? (OrderId: " + orderidd + ")");
 			dialogText.setBounds(75,45,300,30);
@@ -104,13 +106,13 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 			int result = JOptionPane.showConfirmDialog(null, dialogBoxPanel, "File", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 		
 			switch(result) {
-			case 0: // TODO : orderhandler takeorder()
-				if (oh.takeOrder(Integer.parseInt(orderidd), driverId)){ //TODO: agar '2' nya diganti driverId yang nerima order.. how..
+			case 0:
+				if (oh.takeOrder(Integer.parseInt(orderidd), driverId)){
 					displayMsg("Order succesfully taken!");
 					loadAvailableOrders();
 				}
-				//TODO user handler method
-				//   uh.viewUserInformation();
+				//TODO cek ini udah bener blm
+				uh.viewUserInformation(Integer.parseInt(useridd));
 				break;
 			case 1:
 				loadAvailableOrders();

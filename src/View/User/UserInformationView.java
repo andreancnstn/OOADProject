@@ -19,8 +19,10 @@ public class UserInformationView extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel nameValue, addressValue, phoneValue;
-
-	public UserInformationView() {
+	private int userId;
+	
+	public UserInformationView(int userId) {
+		this.userId = userId;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
@@ -73,7 +75,7 @@ public class UserInformationView extends JFrame {
 	}
 	
 	private void addData() {
-		User u = UserHandler.getInstance().getUserbyId(1); // cuma demo
+		User u = UserHandler.getInstance().getUserbyId(userId);
 		nameValue.setText(u.getName());;
 		addressValue.setText(u.getAddress());;
 		phoneValue.setText(u.getPhoneNumber());;

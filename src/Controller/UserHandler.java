@@ -80,8 +80,8 @@ public class UserHandler {
 		return user.getUserbyId(userId);
 	}
 	
-	public UserInformationView viewUserInformation() {
-		return new UserInformationView();
+	public UserInformationView viewUserInformation(int userId) {
+		return new UserInformationView(userId);
 	}
 	
 	public static RegistrationView viewRegistrationForm() {
