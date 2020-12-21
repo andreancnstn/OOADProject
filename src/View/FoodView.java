@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -20,7 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.FoodHandler;
-import Main.DatabaseConnection;
+import Model.Food;
 
 public class FoodView extends JFrame implements ActionListener{
 	
@@ -190,24 +189,16 @@ public class FoodView extends JFrame implements ActionListener{
 	}
 	
 	public void loadFoodData () {
-		DatabaseConnection c = new DatabaseConnection();
+//		DatabaseConnection c = new DatabaseConnection();
 		String header[] = {"Food ID" , "Food Name", "Price", "Description", "Status"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		
-		c.resultSet = c.query("SELECT * FROM food");
+		Vector<Food> v = new FoodHandler().viewAll();
 		
-		try {
-			while(c.resultSet.next() == true) {
-				v = new Vector<>();
-				for (int i = 1; i <= c.metaData.getColumnCount(); i++) {
-					v.add(c.resultSet.getObject(i));
-				}
-				dtm.addRow(v);
-			}
-			table.setModel(dtm);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(int i=0; i < v.size(); i++) {
+			dtm.addRow(new Object[] {v.get(i).getFoodId(), v.get(i).getName(), v.get(i).getPrice(), v.get(i).getDescription(), v.get(i).getStatus()});
 		}
+		
+		table.setModel(dtm);
 	}
 }

@@ -32,7 +32,7 @@ public class OrderQueueView extends JFrame implements ActionListener {
 	JTable table;
 	JScrollPane scrollPane;
 	
-	JButton cookFoodBtn;
+	JButton cookFoodBtn, homeBtn;
 	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
@@ -55,16 +55,20 @@ public class OrderQueueView extends JFrame implements ActionListener {
 		//chef ubah order menjadi cooked
 		cookFoodBtn = new JButton("Cook Food");
 		cookFoodBtn.addActionListener(this);
-	
+		
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 		
 		table = new JTable();
 		loadEntries("SELECT * FROM tblorder WHERE status LIKE 'ordered'");
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 330);
+		scrollPane.setBounds(0, 50, 600, 330);
 		
 		panelBtn.add(cookFoodBtn);
 
+		panel.add(homeBtn);
 		panel.add(scrollPane);
 		
 		init();
@@ -92,7 +96,10 @@ public class OrderQueueView extends JFrame implements ActionListener {
 			
 			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'ordered'");
 		}
-		
+		else if (e.getSource() == homeBtn) {
+			dispose();
+			new ChefView();
+		}
 	}
 	
 	public void displayMsg(String msg) {

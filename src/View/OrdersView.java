@@ -24,6 +24,7 @@ import Controller.FoodHandler;
 import Controller.OrderHandler;
 import Main.DatabaseConnection;
 import Model.Order;
+import View.User.UserHomePageView;
 
 public class OrdersView extends JFrame implements ActionListener {
 
@@ -35,7 +36,7 @@ public class OrdersView extends JFrame implements ActionListener {
 	JButton FilterFinishedOrderBtn;
 	JButton FilterActiveOrderBtn;
 	JButton viewDetailBtn;
-	JButton cancelBtn;
+	JButton cancelBtn, homeBtn;
 	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
@@ -70,18 +71,22 @@ public class OrdersView extends JFrame implements ActionListener {
 		cancelBtn.addActionListener(this);
 		cancelBtn.setVisible(false);
 
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 		
 		table = new JTable();
 		loadEntries("SELECT * FROM tblorder");
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 330);
+		scrollPane.setBounds(0, 50, 600, 330);
 		
 		panelBtn.add(viewDetailBtn);
 		panelBtn.add(FilterFinishedOrderBtn);
 		panelBtn.add(FilterActiveOrderBtn);
 		panelBtn.add(cancelBtn);
-
+		
+		panel.add(homeBtn);
 		panel.add(scrollPane);
 		
 		init();
@@ -161,7 +166,10 @@ public class OrdersView extends JFrame implements ActionListener {
 			Order ord = oh.getOne(Integer.parseInt(orderidd));
 			DetailsView hdv = new DetailsView(ord);
 		}
-		
+		if (e.getSource() == homeBtn) {
+			dispose();
+			new UserHomePageView().setVisible(true);
+		}
 	}
 	
 	public void displayMsg(String msg) {

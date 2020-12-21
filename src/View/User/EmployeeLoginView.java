@@ -32,7 +32,7 @@ public class EmployeeLoginView extends JFrame {
 	private JPanel contentPane;
 	private JTextField emailTxt;
 	private JPasswordField passwordTxt;
-	private static String empEmail;
+	public static String empEmail;
 
 
 	public EmployeeLoginView() {

@@ -20,10 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.EmployeeHandler;
 import Controller.FoodHandler;
 import Controller.OrderHandler;
 import Main.DatabaseConnection;
 import Model.Order;
+import View.User.EmployeeLoginView;
 
 public class TakenOrderView extends JFrame implements ActionListener {
 
@@ -34,7 +36,7 @@ public class TakenOrderView extends JFrame implements ActionListener {
 	
 	JButton viewDetailBtn;
 	JButton orderToChefBtn;
-	JButton deliverBtn;
+	JButton deliverBtn, homeBtn;
 	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
@@ -65,6 +67,10 @@ public class TakenOrderView extends JFrame implements ActionListener {
 		//button buat deliver (if status=cooked change status to delivered)
 		deliverBtn = new JButton("Deliver");
 		deliverBtn.addActionListener(this);
+		
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 	
 		
 		table = new JTable();
@@ -118,7 +124,7 @@ public class TakenOrderView extends JFrame implements ActionListener {
 			
 			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Accepted'");
 		}
-if (e.getSource() == orderToChefBtn) {
+		if (e.getSource() == orderToChefBtn) {
 			
 			int row = table.getSelectedRow();
 			String orderidd = "" + table.getValueAt(row, 0);
@@ -129,7 +135,10 @@ if (e.getSource() == orderToChefBtn) {
 			
 			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Accepted'");
 		}
-		
+		if (e.getSource() == homeBtn) {
+			dispose();
+			new DriverView(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
+		}
 	}
 	
 	public void displayMsg(String msg) {

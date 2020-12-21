@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Model.Food;
-
 public class ChefView extends JFrame{
 	JPanel contentPanel;
 	JButton viewAvailOrderBtn, ManageFoodBtn;

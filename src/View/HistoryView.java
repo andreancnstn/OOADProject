@@ -31,7 +31,7 @@ public class HistoryView extends JFrame implements ActionListener {
 	JPanel panel1, panel, panelBtn, dialogBoxPanel;
 	JTable table;
 	JScrollPane scrollPane;
-	JButton viewDetailBtn;
+	JButton viewDetailBtn, homeBtn;
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
 	JTextField orderIdTxt;
@@ -54,6 +54,9 @@ public class HistoryView extends JFrame implements ActionListener {
 		viewDetailBtn = new JButton("View Detail");
 		viewDetailBtn.addActionListener(this);
 
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 		
 		table = new JTable();
 		loadHistory();
@@ -63,6 +66,7 @@ public class HistoryView extends JFrame implements ActionListener {
 		
 		panelBtn.add(viewDetailBtn);
 
+		panel.add(homeBtn);
 		panel.add(scrollPane);
 		
 		init();
@@ -91,7 +95,9 @@ public class HistoryView extends JFrame implements ActionListener {
 			Order ord = oh.getOne(Integer.parseInt(orderidd));
 			DetailsView hdv = new DetailsView(ord);
 		}
-		
+		else if (e.getSource() == homeBtn) {
+			//ini bisa berubah sesuai siapa yg akses ?
+		}
 	}
 	
 	public void displayMsg(String msg) {

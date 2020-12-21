@@ -20,10 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.EmployeeHandler;
 import Controller.FoodHandler;
 import Controller.OrderHandler;
 import Main.DatabaseConnection;
 import Model.Order;
+import View.User.EmployeeLoginView;
 
 public class DetailsView extends JFrame implements ActionListener {
 
@@ -31,7 +33,7 @@ public class DetailsView extends JFrame implements ActionListener {
 	JPanel panel1, panel, panelBtn, dialogBoxPanel;
 	JTable table;
 	JScrollPane scrollPane;
-	JButton viewDetailBtn;
+	JButton viewDetailBtn, homeBtn;
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
 	JTextField orderIdTxt;
@@ -61,8 +63,12 @@ public class DetailsView extends JFrame implements ActionListener {
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		scrollPane.setBounds(0, 20, 600, 330);
+		
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 
-
+		panel.add(homeBtn);
 		panel.add(scrollPane);
 		
 		init();
@@ -78,7 +84,10 @@ public class DetailsView extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if (e.getSource() == homeBtn) {
+			dispose();
+			new DriverView(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
+		}
 	}
 	
 	public void displayMsg(String msg) {

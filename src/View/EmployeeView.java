@@ -190,7 +190,7 @@ public class EmployeeView extends JFrame implements ActionListener{
 		}
 		else if (e.getSource() == homeBtn) {
 			dispose();
-			ManagerView mv = new ManagerView();
+			new ManagerView();
 		}
 	}
 	
