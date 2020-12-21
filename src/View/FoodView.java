@@ -31,7 +31,7 @@ public class FoodView extends JFrame implements ActionListener{
 	JPanel panel1, panel, panelBtn, dialogBoxPanel;
 	JTable table;
 	JScrollPane scrollPane;
-	JButton addBtn, removeBtn, changeStatBtn;
+	JButton addBtn, removeBtn, changeStatBtn, homeBtn;
 	DefaultTableModel dtm;
 	JLabel nameLbl, priceLbl, descLbl, judulLbl;
 	JTextField nameTxt, priceTxt, descTxt;
@@ -72,12 +72,15 @@ public class FoodView extends JFrame implements ActionListener{
 		removeBtn.addActionListener(this);
 		changeStatBtn = new JButton("Change Status");
 		changeStatBtn.addActionListener(this);
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 		
 		table = new JTable();
 		loadFoodData();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 330);
+		scrollPane.setBounds(0, 50, 600, 300);
 		
 		panelBtn.add(addBtn);
 		panelBtn.add(changeStatBtn);
@@ -91,6 +94,7 @@ public class FoodView extends JFrame implements ActionListener{
 		panel.add(nameTxt);
 		panel.add(priceTxt);
 		panel.add(descTxt);
+		panel.add(homeBtn);
 		panel.add(scrollPane);
 		
 		init();
@@ -174,6 +178,10 @@ public class FoodView extends JFrame implements ActionListener{
 				loadFoodData();
 				break;
 			}
+		}
+		else if (e.getSource() == homeBtn) {
+			dispose();
+			ChefView cv = new ChefView();
 		}
 	}
 	

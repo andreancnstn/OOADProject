@@ -34,7 +34,7 @@ public class EmployeeView extends JFrame implements ActionListener{
 	JPanel contentPanel, panel, buttonPanel, dialogBoxPanel; 
 	JLabel rolelabel, namelabel, doblabel, emaillabel, passwordlabel, statuslabel, lPlatelabel;
 	JTextField namefield, dobfield, emailfield, passwordfield, lPlateField;
-	JButton hirebtn, firebtn;
+	JButton hirebtn, firebtn, homeBtn;
 	JComboBox<String> statusfield, rolefield;
 	JTable table;
 	JScrollPane scrollPane;
@@ -57,25 +57,28 @@ public class EmployeeView extends JFrame implements ActionListener{
 		panel.setLayout(null);
 		
 		rolelabel = new JLabel("Role");
-		rolelabel.setBounds(10, 240, 100, 25);
+		rolelabel.setBounds(10, 300, 100, 25);
 		namelabel = new JLabel("Name");
-		namelabel.setBounds(10, 280, 100, 25);
+		namelabel.setBounds(10, 340, 100, 25);
 		doblabel = new JLabel("DOB");
-		doblabel.setBounds(10, 320, 100, 25);
+		doblabel.setBounds(10, 380, 100, 25);
 		emaillabel = new JLabel("Email");
-		emaillabel.setBounds(10, 360, 100, 25);
+		emaillabel.setBounds(10, 420, 100, 25);
 		passwordlabel = new JLabel("Password");
-		passwordlabel.setBounds(10, 400, 100, 25);
+		passwordlabel.setBounds(10, 460, 100, 25);
 //		statuslabel = new JLabel("Status");
 //		statuslabel.setBounds(10, 440, 100, 25);
-		lPlatelabel = new JLabel("Licene Plate");
-		lPlatelabel.setBounds(10, 440, 100, 25);
+		lPlatelabel = new JLabel("License Plate");
+		lPlatelabel.setBounds(10, 500, 100, 25);
 		lPlatelabel.setVisible(false);
 		
 		hirebtn = new JButton("HIRE");
 		hirebtn.addActionListener(this);
 		firebtn = new JButton("FIRE");
 		firebtn.addActionListener(this);
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 		
 		roleList = new Vector<String>();
 		roleList.add("Please select role");
@@ -83,18 +86,18 @@ public class EmployeeView extends JFrame implements ActionListener{
 		roleList.add("Chef");
 		
 		rolefield = new JComboBox<String>(roleList);
-		rolefield.setBounds(110, 240, 300, 25);
+		rolefield.setBounds(110, 300, 300, 25);
 		rolefield.addActionListener(this);
 		namefield = new JTextField();
-		namefield.setBounds(110, 280, 300, 25);
+		namefield.setBounds(110, 340, 300, 25);
 		dobfield = new JTextField("YYYY-MM-DD");
-		dobfield.setBounds(110, 320, 300, 25);
+		dobfield.setBounds(110, 380, 300, 25);
 		emailfield = new JTextField();
-		emailfield.setBounds(110, 360, 300, 25);
+		emailfield.setBounds(110, 420, 300, 25);
 		passwordfield = new JPasswordField();
-		passwordfield.setBounds(110, 400, 300, 25);
+		passwordfield.setBounds(110, 460, 300, 25);
 		lPlateField = new JTextField();
-		lPlateField.setBounds(110,  440, 300, 25);
+		lPlateField.setBounds(110,  500, 300, 25);
 		lPlateField.setVisible(false);
 		
 //		statusList = new Vector<>();
@@ -108,7 +111,7 @@ public class EmployeeView extends JFrame implements ActionListener{
 		loadManageEmployeeData();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 200);
+		scrollPane.setBounds(0, 70, 600, 200);
 		
 		panel.add(rolelabel);
 		panel.add(namelabel);
@@ -129,6 +132,7 @@ public class EmployeeView extends JFrame implements ActionListener{
 		
 		buttonPanel.add(hirebtn);
 		buttonPanel.add(firebtn);
+		panel.add(homeBtn);
 		
 //		if (rolefield.getSelectedItem().toString().equals("Driver")) {
 //			lPlatelabel.setVisible(true);
@@ -186,6 +190,14 @@ public class EmployeeView extends JFrame implements ActionListener{
 				lPlatelabel.setVisible(true);
 				lPlateField.setVisible(true);
 			}
+			else {
+				lPlatelabel.setVisible(false);
+				lPlateField.setVisible(false);
+			}
+		}
+		else if (e.getSource() == homeBtn) {
+			dispose();
+			ManagerView mv = new ManagerView();
 		}
 	}
 	
