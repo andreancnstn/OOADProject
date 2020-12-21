@@ -3,6 +3,7 @@ package Controller;
 import Model.User;
 import View.User.LoginView;
 import View.User.RegistrationView;
+import View.User.UserInformationView;
 
 public class UserHandler {
 	
@@ -75,8 +76,12 @@ public class UserHandler {
 		return true;
 	}
 	
-	public void viewUserInformation() {
-		
+	public User getUserbyId(Integer userId) {
+		return user.getUserbyId(userId);
+	}
+	
+	public UserInformationView viewUserInformation() {
+		return new UserInformationView();
 	}
 	
 	public static RegistrationView viewRegistrationForm() {
