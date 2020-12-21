@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.CartHandler;
 import Controller.FoodHandler;
 import Model.Food;
+import View.OrdersView;
 
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -37,13 +38,11 @@ public class UserHomePageView extends JFrame {
 	private JTable foodTable;
 	private JLabel idValue, nameValue, priceValue, descValue;
 	private JTextField qtyTxt;
-	private JButton addToCart, viewCart;
+	private JButton addToCart, viewCart, ordersViewBtn;
 	
 	private Vector<Food> item;
 	
 	public UserHomePageView() {
-		item = new FoodHandler().viewAll();
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
@@ -136,6 +135,10 @@ public class UserHomePageView extends JFrame {
 		viewCart.setBounds(544, 68, 97, 25);
 		contentPane.add(viewCart);
 		
+		ordersViewBtn = new JButton("My Orders");
+		ordersViewBtn.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		ordersViewBtn.setBounds(41, 68, 97, 25);
+		contentPane.add(ordersViewBtn);
 		
 		loadData();
 		addListener();
@@ -206,11 +209,18 @@ public class UserHomePageView extends JFrame {
 			}
 		});
 		
-		
+		ordersViewBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new OrdersView();
+			}
+		});
 	}
 
 	private void loadData() {
-		
+		item = new FoodHandler().viewAll();
 		String[] header = {"Food ID" , "Food Name", "Price", "Description"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		
