@@ -35,6 +35,7 @@ public class OrdersView extends JFrame implements ActionListener {
 	JButton FilterFinishedOrderBtn;
 	JButton FilterActiveOrderBtn;
 	JButton viewDetailBtn;
+	JButton cancelBtn;
 	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
@@ -63,6 +64,11 @@ public class OrdersView extends JFrame implements ActionListener {
 		FilterFinishedOrderBtn.addActionListener(this);
 		FilterActiveOrderBtn = new JButton("View Only Active Order");
 		FilterActiveOrderBtn.addActionListener(this);
+		
+		//cancelBtn (muncul setelah klik filterActiveOrderBtn)
+		cancelBtn = new JButton("Cancel order");
+		cancelBtn.addActionListener(this);
+		cancelBtn.setVisible(false);
 
 		
 		table = new JTable();
@@ -74,6 +80,7 @@ public class OrdersView extends JFrame implements ActionListener {
 		panelBtn.add(viewDetailBtn);
 		panelBtn.add(FilterFinishedOrderBtn);
 		panelBtn.add(FilterActiveOrderBtn);
+		panelBtn.add(cancelBtn);
 
 		panel.add(scrollPane);
 		
@@ -92,12 +99,60 @@ public class OrdersView extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		OrderHandler oh = new OrderHandler();
 		if (e.getSource() == FilterFinishedOrderBtn) {
-			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Finished'");
+//			TODO yg skrg masih pakai raw query, blm pakai OrderHandler samsek
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Finished'"); //WHERE userId = CURRENT USER ID
+			
+
+//			harusnya kayak gw comment ini
+//			Vector v = oh.viewAllHistory(/*CURRENT USERID*/);
+//			lalu tampilin vectornya di tabel
+
 		}
 		if (e.getSource() == FilterActiveOrderBtn) {
+			//TODO ini juga masih pakai raw query, blm pakai OrderHandler samsek
 			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
-			//TODO bisa cancel active order dkk
+			
+			
+			FilterActiveOrderBtn.setVisible(false);
+			FilterFinishedOrderBtn.setVisible(false);
+			cancelBtn.setVisible(true);
 		}
+		
+		if (e.getSource() == cancelBtn) {
+			
+			int row = table.getSelectedRow();
+			String orderidd = "" + table.getValueAt(row, 0);
+			int ord = Integer.parseInt(orderidd);
+			//confirm dialog
+			JLabel dialogText = new JLabel("Are you sure to cancel order?");
+			dialogText.setBounds(50,45,300,30);
+			dialogBoxPanel.add(dialogText);
+			
+			UIManager.put("OptionPane.minimumSize", new Dimension(400,200));
+			int result = JOptionPane.showConfirmDialog(null, dialogBoxPanel, "File", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+			switch(result) {
+			case 0:
+				if (oh.removeOrder(ord)){
+					displayMsg("Cancel successful!");
+				}
+				else {
+					displayMsg("Cancel unsuccessful!");
+				}
+
+				FilterActiveOrderBtn.setVisible(true);
+				FilterFinishedOrderBtn.setVisible(true);
+				cancelBtn.setVisible(false);
+				loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+				break;
+			case 1:
+				FilterActiveOrderBtn.setVisible(true);
+				FilterFinishedOrderBtn.setVisible(true);
+				cancelBtn.setVisible(false);
+				loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+				break;
+			}
+		}
+		
 		if (e.getSource() == viewDetailBtn) {
 			
 			int row = table.getSelectedRow();
