@@ -32,9 +32,8 @@ public class TakenOrderView extends JFrame implements ActionListener {
 	JTable table;
 	JScrollPane scrollPane;
 	
-	JButton FilterFinishedOrderBtn;
-	JButton FilterActiveOrderBtn;
 	JButton viewDetailBtn;
+	JButton orderToChefBtn;
 	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
@@ -57,6 +56,10 @@ public class TakenOrderView extends JFrame implements ActionListener {
 		//ViewDetail
 		viewDetailBtn = new JButton("View Order Detail");
 		viewDetailBtn.addActionListener(this);
+		
+		//button buat suruh chef masakin orderan (ClickOrderButton)
+		orderToChefBtn = new JButton("Tell Chef To Cook");
+		orderToChefBtn.addActionListener(this);
 	
 		
 		table = new JTable();
@@ -66,13 +69,14 @@ public class TakenOrderView extends JFrame implements ActionListener {
 		scrollPane.setBounds(0, 20, 600, 330);
 		
 		panelBtn.add(viewDetailBtn);
+		panelBtn.add(orderToChefBtn);
 
 		panel.add(scrollPane);
 		
 		init();
 	}
 	private void init() {
-		setTitle("View Orders");
+		setTitle("View Taken Orders");
 		setVisible(true);
 		setSize(600,600);
 		setLocationRelativeTo(null);
@@ -91,6 +95,17 @@ public class TakenOrderView extends JFrame implements ActionListener {
 			
 			Order ord = oh.getOne(Integer.parseInt(orderidd));
 			DetailsView hdv = new DetailsView(ord);
+		}
+		if (e.getSource() == orderToChefBtn) {
+			
+			int row = table.getSelectedRow();
+			String orderidd = "" + table.getValueAt(row, 0);
+			int ord = Integer.parseInt(orderidd);
+			//mengupdate status yg diklik to 'ordered'
+			oh.updateStatus(ord, "ordered");
+			displayMsg("Success!  Ordered chef to cook!");
+			
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Accepted'");
 		}
 		
 	}
