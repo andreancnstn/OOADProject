@@ -44,11 +44,9 @@ public class OrderHandler {
 		
 	}
 	
-	public Order getOne() {
-		//TODO
-//		Order o = new Order(0, null, null, 0, 0, null);
-//		return o;
-		return null;
+	public Order getOne(int orderId) {
+		Order o = new Order();
+		return o.getOne(orderId);
 	}
 	
 	//views

@@ -17,6 +17,8 @@ import Model.Driver;
 import Model.User;
 import View.EmployeeView;
 import View.FoodView;
+import View.HistoryDetailView;
+import View.HistoryView;
 import View.MenuView;
 import View.AvailableOrdersView;
 
@@ -64,8 +66,8 @@ public class MainTest extends JFrame implements ActionListener{
 		//INIT UNTUK PENCET TAKE ORDER
 		simulasiBikinDriver();					//		REGISTER DRIVER
 
-		AvailableOrdersView ov = new AvailableOrdersView();		// BUTUH VIEW ' VIEW USER INFO '
-//		OrderDetailsView odv = new OrderDetailsView();
+//		AvailableOrdersView ov = new AvailableOrdersView();		// BUTUH VIEW ' VIEW USER INFO '
+		HistoryView hdv = new HistoryView();
 	}
 
 	private void simulasiBikinDriver() {

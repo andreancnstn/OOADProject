@@ -64,4 +64,26 @@ public class OrderDetail {
 		}
 		return v;
 	}
+	public Vector<OrderDetail> viewHistoryDetail(int orderId) {
+		Vector<OrderDetail> v = new Vector<OrderDetail>();
+		OrderDetail od = null;
+
+		c.resultSet = c.query("SELECT * orderdetail WHERE status LIKE finished"); // TODO fix syntax
+
+		try {
+			while(c.resultSet.next() == true) {
+				for (int i = 0; i <= c.metaData.getColumnCount(); i++) {
+					int orderIdd = c.resultSet.getInt(1);
+					int foodIdd = c.resultSet.getInt(2);
+					int qtyy = c.resultSet.getInt(3);
+					od = new OrderDetail(orderIdd, foodIdd, qtyy);
+				}
+				v.add(od);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		return v;
+	}
 }
