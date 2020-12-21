@@ -98,7 +98,7 @@ public class OrderHandler {
 	
 	//TODO beberapa views lainnya
 	
-	public void viewAvailableOrder() {
-		AvailableOrdersView v = new AvailableOrdersView();
+	public void viewAvailableOrder(Integer id) {
+		AvailableOrdersView v = new AvailableOrdersView(id);
 	}
 }

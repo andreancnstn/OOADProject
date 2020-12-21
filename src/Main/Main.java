@@ -7,11 +7,11 @@ import View.User.UserLandingPage;
 public class Main{
 	
 	public Main() {
-//		UserLandingPage u = new UserLandingPage();
-//		u.setVisible(true);
+		UserLandingPage u = new UserLandingPage();
+		u.setVisible(true);
 		
 //		OrdersView ov = new OrdersView();
-		TakenOrderView tov = new TakenOrderView();
+//		TakenOrderView tov = new TakenOrderView();
 	}
 
 	public static void main(String[] args) {

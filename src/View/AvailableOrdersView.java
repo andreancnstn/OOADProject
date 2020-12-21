@@ -35,8 +35,10 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 	JLabel orderIdLbl, judulLbl;
 	JTextField orderIdTxt;
 	Vector<Object> v;
+	private Integer driverId;
 	
-	public AvailableOrdersView() throws HeadlessException {
+	public AvailableOrdersView(Integer id) throws HeadlessException {
+		driverId = id;
 		// TODO Auto-generated constructor stub
 		panel1 = new JPanel();
 		panel1.setLayout(new BorderLayout(0,0));
@@ -98,7 +100,7 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 		
 			switch(result) {
 			case 0: // TODO : orderhandler takeorder()
-				if (oh.takeOrder(Integer.parseInt(orderidd), 2)){ //TODO: agar '2' nya diganti driverId yang nerima order.. how..
+				if (oh.takeOrder(Integer.parseInt(orderidd), driverId)){ //TODO: agar '2' nya diganti driverId yang nerima order.. how..
 					displayMsg("Order succesfully taken!");
 				}
 				//TODO user handler method

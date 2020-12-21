@@ -10,9 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Controller.EmployeeHandler;
 import Controller.OrderHandler;
-import Model.Employee;
 
 public class DriverView extends JFrame{
 	JPanel contentPanel;
@@ -42,7 +40,7 @@ public class DriverView extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				oh.viewAvailableOrder();
+				oh.viewAvailableOrder(id);
 			}
 		});
 		contentPanel.add(viewAvailOrderBtn);

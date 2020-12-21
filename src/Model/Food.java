@@ -81,8 +81,13 @@ public class Food {
 	}
 	
 	public boolean changeStatus(int foodId) {
-		c.update("UPDATE food SET status='Not available' WHERE foodId=" + foodId);
-		
+		Food f = getFood(foodId);
+		if (f.getStatus().equals("Available")) {
+			c.update("UPDATE food SET status='Not available' WHERE foodId=" + foodId);
+		}
+		else if (f.getStatus().equals("Not available")) {
+			c.update("UPDATE food SET status='Available' WHERE foodId=" + foodId);
+		}
 		return true;
 	}
 	
