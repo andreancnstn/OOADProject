@@ -155,23 +155,16 @@ public class EmployeeView extends JFrame implements ActionListener{
 		String header[] = {"Role", "Name", "DOB", "Email", "Status"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		
-		c.resultSet = c.query("SELECT role.roleName, employee.name, employee.DOB,"
-				+ "employee.email, employee.status FROM employee "
-				+ "INNER JOIN role ON employee.roleId=role.roleId");
+		Vector<Employee> emp = new EmployeeHandler().getInstance().viewAll(0);
+		Role r = new Role();
 		
-		try {
-			while (c.resultSet.next() == true) {
-				tablecontent = new Vector<Object>();
-				for (int i = 1; i <= c.metaData.getColumnCount(); i++) {
-					tablecontent.add(c.resultSet.getObject(i));
-				}
-				dtm.addRow(tablecontent);
-			}
-			table.setModel(dtm);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(int i=0; i < emp.size(); i++) {
+			dtm.addRow(new Object[] {r.getRoleName(emp.get(i).getRoleId()), emp.get(i).getName()
+					, emp.get(i).getDOB(), emp.get(i).getEmail(),
+					emp.get(i).getStatus()});
 		}
+		
+		table.setModel(dtm);
 	}
 
 	@Override

@@ -19,6 +19,21 @@ public class Employee {
 
 	DatabaseConnection c = new DatabaseConnection();
 
+	public Employee(int id, int roleId, String name, Date dOB, String email, String password, String status) {
+		super();
+		this.id = id;
+		this.roleId = roleId;
+		this.name = name;
+		DOB = dOB;
+		this.email = email;
+		this.password = password;
+		this.status = status;
+	}
+	
+	public Employee() {
+		
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -91,9 +106,32 @@ public class Employee {
 	
 	public Vector<Employee> viewAll(int roleId) {
 		
-		Vector<Employee> v = null;
+		Vector<Employee> v = new Vector<>();
+		Employee e = null;
 		
-		return v;
+		c.resultSet = c.query("SELECT * FROM employee");
+		
+		try {
+			while(c.resultSet.next()) {
+				for (int i = 0; i < c.metaData.getColumnCount(); i++) {
+					Integer id = c.resultSet.getInt("id");
+					Integer roleid = c.resultSet.getInt("roleId");
+					String name = c.resultSet.getString("name");
+					Date dob = c.resultSet.getDate("DOB");
+					String email = c.resultSet.getString("email");
+					String pass = c.resultSet.getString("password");
+					String status = c.resultSet.getString("status");
+					e = new Employee(id, roleid, name, dob, email, pass, status);
+				}
+				v.add(e);
+			}
+			return v;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	public boolean getEmp(String email, String password) {

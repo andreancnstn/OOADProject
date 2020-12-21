@@ -95,7 +95,7 @@ public class EmployeeHandler {
 	
 	public Vector<Employee> viewAll(int roleId) {
 		
-		Vector<Employee> em = new Vector<Employee>();
+		Vector<Employee> em = model.viewAll(roleId);
 		
 		return em;
 	}

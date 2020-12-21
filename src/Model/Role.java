@@ -40,8 +40,22 @@ public class Role {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(empId);
 		return empId;
+	}
+	
+	public String getRoleName(int roleId) {
+		ResultSet set = connection.query("SELECT roleName FROM role WHERE roleId=" + roleId + " LIMIT 1");
+		
+		String role = "";
+		try {
+			if (set.next()) {
+				role = set.getString("roleName");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return role;
 	}
 
 }
