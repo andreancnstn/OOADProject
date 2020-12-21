@@ -48,10 +48,11 @@ public class OrderHandler {
 		od.addDetail(orderId, foodId, qty);
 		
 	}
-//	public boolean removeOrder(int orderId) {
-//		return false;
-//		
-//	}
+	
+	public boolean removeOrder(int orderId) {
+		return o.removeOrder(orderId);
+	}
+	
 //	public boolean removeDetail(int orderId) {
 //		return false;
 //		

@@ -103,6 +103,7 @@ public class OrdersView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		OrderHandler oh = new OrderHandler();
+		dialogBoxPanel = new JPanel();
 		if (e.getSource() == FilterFinishedOrderBtn) {
 //			TODO yg skrg masih pakai raw query, blm pakai OrderHandler samsek
 			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Finished'"); //WHERE userId = CURRENT USER ID
@@ -137,7 +138,7 @@ public class OrdersView extends JFrame implements ActionListener {
 			int result = JOptionPane.showConfirmDialog(null, dialogBoxPanel, "File", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 			switch(result) {
 			case 0:
-				if (/*oh.removeOrder(ord)*/ true){
+				if (oh.removeOrder(ord)){
 					displayMsg("Cancel successful!");
 				}
 				else {

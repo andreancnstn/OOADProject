@@ -84,7 +84,7 @@ public class Order {
 		
 	}
 	public boolean removeOrder(int orderId) {
-		c.update("DELETE FROM order WHERE orderId=" + orderId);
+		c.update("DELETE FROM tblorder WHERE orderId=" + orderId);
 		return true;
 		
 	}
