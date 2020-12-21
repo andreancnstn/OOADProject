@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Vector;
 
+import Model.Employee;
 import Model.Food;
 import Model.Order;
 import Model.OrderDetail;
@@ -16,9 +17,18 @@ import View.AvailableOrdersView;
 public class OrderHandler {
 	Order o = new Order();
 	OrderDetail od = new OrderDetail();
+	private static OrderHandler oh;
+	private Employee emp;
 	
 	public OrderHandler() {
 		// TODO Auto-generated constructor stub
+		emp = new Employee();
+	}
+	
+	public static synchronized OrderHandler getInstance() {
+		if (oh == null) oh = new OrderHandler();
+		
+		return oh;
 	}
 	
 	public boolean addOrder(User user) {
@@ -91,5 +101,4 @@ public class OrderHandler {
 	public void viewAvailableOrder() {
 		AvailableOrdersView v = new AvailableOrdersView();
 	}
-	
 }

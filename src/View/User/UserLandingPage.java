@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.EmployeeHandler;
 import Controller.UserHandler;
 
 import javax.swing.JLabel;
@@ -62,5 +63,18 @@ public class UserLandingPage extends JFrame {
 			}
 		});
 		contentPane.add(login);
+		
+		JButton loginEmployee = new JButton("LOGIN EMPLOYEE");
+		loginEmployee.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		loginEmployee.setBounds(230, 300, 200, 45);
+		loginEmployee.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				EmployeeHandler.viewEmployeeLoginForm().setVisible(true);;
+			}
+		});
+		contentPane.add(loginEmployee);
 	}
 }

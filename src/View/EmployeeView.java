@@ -207,8 +207,6 @@ public class EmployeeView extends JFrame implements ActionListener{
 			// roleId = 2 artinya Driver, dilihat dari table role
 			if (roleId == 2) {
 				Driver d = new Driver(lPlateField.getText().toString(), role.getEmpId(emailfield.getText()));
-				//TODO createDriver hrsnya terima 2 param : employeeId plateNumber
-				//ini yg param 1 nya kayaknya email, bukan employeeId
 				d.createDriver(role.getEmpId(emailfield.getText()),lPlateField.getText().toString());
 			}
 			displayErrorMsg("Employee succesfully created");

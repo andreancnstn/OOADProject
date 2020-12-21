@@ -1,6 +1,7 @@
 package Controller;
 
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,20 +12,31 @@ import javax.swing.text.View;
 import Main.DatabaseConnection;
 import Model.Employee;
 import View.EmployeeView;
+import View.User.EmployeeLoginView;
 
 public class EmployeeHandler {
 	
 	private EmployeeView view;
 	private Employee model;
+	private static EmployeeHandler eh;
 	DatabaseConnection c = new DatabaseConnection();
 	Vector<String> v = new Vector<>();
+	
+	public EmployeeHandler() {
+		model = new Employee();
+	}
+	
+	public static synchronized EmployeeHandler getInstance() {
+		if (eh == null) eh = new EmployeeHandler();
+		
+		return eh;
+	}
 
-	public void viewManageEmployeeForm() {
-		view = new EmployeeView();
+	public EmployeeView viewManageEmployeeForm() {
+		return new EmployeeView();
 	}
 	
 	public boolean createEmployee(int roleId, String name, String DOB, String email, String password, String status) {
-		model = new Employee();
 		
 		if (validateFields(name, DOB, email) == true) {
 			model.createAccount(roleId, name, Date.valueOf(DOB), email, password, status);
@@ -76,8 +88,6 @@ public class EmployeeHandler {
 	}
 	
 	public boolean changeStatus(int id) {
-		model = new Employee();
-		
 		model.changeStatus(id);
 		
 		return true;
@@ -89,5 +99,22 @@ public class EmployeeHandler {
 		
 		return em;
 	}
+	
+	public static EmployeeLoginView viewEmployeeLoginForm() {
+		return new EmployeeLoginView();
+	}
+	
+	public boolean validateEmp(String email, String password) {
+		return model.getEmp(email, password);
+	}
+	
+	public Integer getRoleIdfromEmail(String Email) {
+		return model.getRoleIdfromEmail(Email);
+	}
+	
+	public Integer getLogedinEmpId(String email) {
+		return model.getLogedinEmpId(email);
+	}
 
+	
 }
