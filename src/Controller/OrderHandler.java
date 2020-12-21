@@ -45,32 +45,31 @@ public class OrderHandler {
 		od.addDetail(orderId, foodId, qty);
 		
 	}
-	public boolean removeOrder(int orderId) {
-		return false;
-		
-	}
-	public boolean removeDetail(int orderId) {
-		return false;
-		
-	}
+//	public boolean removeOrder(int orderId) {
+//		return false;
+//		
+//	}
+//	public boolean removeDetail(int orderId) {
+//		return false;
+//		
+//	}
 	
 	public Order getOne(int orderId) {
 		return o.getOne(orderId);
 	}
 	
-	//views
-	public List viewAllHistory(int id) {
-		return null;
-		
-	}
-	public List viewById(int orderId) {
-		return null;
-		
-	}
-	public List viewOrderList(String status) {
-		return null;
-		
-	}
+//	public List viewAllHistory(int id) {
+//		return null;
+//		
+//	}
+//	public List viewById(int orderId) {
+//		return null;
+//		
+//	}
+//	public List viewOrderList(String status) {
+//		return null;
+//		
+//	}
 	public Vector<Order> viewDetailById(int orderId) {
 		Vector<Order> order = o.viewDetailById(orderId);
 		return order;
@@ -88,17 +87,41 @@ public class OrderHandler {
 	}
 	
 	
-//VIEWS
-	//ORDER HANDLER TOTAL ADA 8 VIEW
-	//kalau di class diagramnya return typenya view, tp ini pakai void
-	//jdi di dlmnya isi new View
-	public void viewTakenOrder() {
-		
-	}
-	
-	//TODO beberapa views lainnya
+//	public void viewTakenOrder() {
+//		
+//	}
+//	
+//	private void viewDetails() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//	
+//	private void viewHistory() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//	private void viewManageStatusForm() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//	
+//	private void viewProfit() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//	
+//	public void filterDriver(int driverId) { //di class diagram ini dia return view 
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	
+//	private void viewOrderQueue() {
+//		// TODO Auto-generated method stub
+//
+//	}
 	
 	public void viewAvailableOrder(Integer id) {
 		AvailableOrdersView v = new AvailableOrdersView(id);
 	}
+	
 }
