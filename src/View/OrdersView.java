@@ -23,20 +23,25 @@ import javax.swing.table.DefaultTableModel;
 import Controller.FoodHandler;
 import Controller.OrderHandler;
 import Main.DatabaseConnection;
+import Model.Order;
 
-public class AvailableOrdersView extends JFrame implements ActionListener {
+public class OrdersView extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	JPanel panel1, panel, panelBtn, dialogBoxPanel;
 	JTable table;
 	JScrollPane scrollPane;
-	JButton takeOrderBtn;
+	
+	JButton FilterFinishedOrderBtn;
+	JButton FilterActiveOrderBtn;
+	JButton viewDetailBtn;
+	
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
 	JTextField orderIdTxt;
 	Vector<Object> v;
 	
-	public AvailableOrdersView() throws HeadlessException {
+	public OrdersView() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		panel1 = new JPanel();
 		panel1.setLayout(new BorderLayout(0,0));
@@ -49,25 +54,33 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 		panel1.add(panelBtn, BorderLayout.SOUTH);
 		panel.setLayout(null);
 		
-
-		takeOrderBtn = new JButton("Take Order");
-		takeOrderBtn.addActionListener(this);
+		//ViewDetail
+		viewDetailBtn = new JButton("View Order Detail");
+		viewDetailBtn.addActionListener(this);
+		
+		//Filter
+		FilterFinishedOrderBtn = new JButton("View Only Finished Orders");
+		FilterFinishedOrderBtn.addActionListener(this);
+		FilterActiveOrderBtn = new JButton("View Only Active Order");
+		FilterActiveOrderBtn.addActionListener(this);
 
 		
 		table = new JTable();
-		loadAvailableOrders();
+		loadEntries("SELECT * FROM tblorder");
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		scrollPane.setBounds(0, 20, 600, 330);
 		
-		panelBtn.add(takeOrderBtn);
+		panelBtn.add(viewDetailBtn);
+		panelBtn.add(FilterFinishedOrderBtn);
+		panelBtn.add(FilterActiveOrderBtn);
 
 		panel.add(scrollPane);
 		
 		init();
 	}
 	private void init() {
-		setTitle("Available Orders");
+		setTitle("View Orders");
 		setVisible(true);
 		setSize(600,600);
 		setLocationRelativeTo(null);
@@ -78,36 +91,20 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		OrderHandler oh = new OrderHandler();
-//		UserHandler uh = new UserHandler();
-		if (e.getSource() == takeOrderBtn) {
-			
-			dialogBoxPanel = new JPanel();
-			dialogBoxPanel.setSize(new Dimension(250,100));
-			dialogBoxPanel.setLayout(null);
+		if (e.getSource() == FilterFinishedOrderBtn) {
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Finished'");
+		}
+		if (e.getSource() == FilterActiveOrderBtn) {
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+			//TODO bisa cancel active order dkk
+		}
+		if (e.getSource() == viewDetailBtn) {
 			
 			int row = table.getSelectedRow();
-			
 			String orderidd = "" + table.getValueAt(row, 0);
 			
-			JLabel dialogText = new JLabel("Want to take this order? (OrderId: " + orderidd + ")");
-			dialogText.setBounds(75,45,300,30);
-			dialogBoxPanel.add(dialogText);
-			
-			UIManager.put("OptionPane.minimumSize", new Dimension(400,200));
-			int result = JOptionPane.showConfirmDialog(null, dialogBoxPanel, "File", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-		
-			switch(result) {
-			case 0: // TODO : orderhandler takeorder()
-				if (oh.takeOrder(Integer.parseInt(orderidd), 2)){ //TODO: agar '2' nya diganti driverId yang nerima order.. how..
-					displayMsg("Order succesfully taken!");
-				}
-				//TODO user handler method
-				//   uh.viewUserInformation();
-				break;
-			case 1:
-				loadAvailableOrders();
-				break;
-			}
+			Order ord = oh.getOne(Integer.parseInt(orderidd));
+			DetailsView hdv = new DetailsView(ord);
 		}
 		
 	}
@@ -116,12 +113,12 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(this, msg);
 	}
 	
-	public void loadAvailableOrders () {
+	public void loadEntries (String que) {
 		DatabaseConnection c = new DatabaseConnection();
 		String header[] = {"Order ID" , "Date", "Address", "userId"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		
-		c.resultSet = c.query("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+		c.resultSet = c.query(que);
 		
 		try {
 			while(c.resultSet.next() == true) {

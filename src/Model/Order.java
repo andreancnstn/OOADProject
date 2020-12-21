@@ -70,7 +70,7 @@ public class Order {
 		return ord;
 		
 	}
-	public boolean updateStatus(int orderId, String status) {
+	public boolean updateStatus(int orderId, String status) { //default status: Not Accepted
 		//accepted, ordered, cooked, finished
 		c.update("UPDATE order SET status='"+ status +"' WHERE orderId=" + orderId); //TODO fix syntax
 		return true;
