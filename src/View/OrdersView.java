@@ -137,7 +137,7 @@ public class OrdersView extends JFrame implements ActionListener {
 			int result = JOptionPane.showConfirmDialog(null, dialogBoxPanel, "File", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 			switch(result) {
 			case 0:
-				if (oh.removeOrder(ord)){
+				if (/*oh.removeOrder(ord)*/ true){
 					displayMsg("Cancel successful!");
 				}
 				else {

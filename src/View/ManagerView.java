@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Controller.EmployeeHandler;
+import Controller.OrderHandler;
 
 public class ManagerView extends JFrame{
 	
@@ -32,11 +33,10 @@ public class ManagerView extends JFrame{
 		viewFinanceBtn = new JButton("View Financial Report");
 		viewFinanceBtn.setBounds(160, 200, 250, 45);
 		viewFinanceBtn.addActionListener(new ActionListener() {
-			//buat view Profit
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				dispose();
+				OrderHandler.getInstance().viewProfit();
 			}
 		});
 		contentPanel.add(viewFinanceBtn);

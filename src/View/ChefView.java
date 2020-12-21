@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import Controller.OrderHandler;
+
 public class ChefView extends JFrame{
 	JPanel contentPanel;
 	JButton viewAvailOrderBtn, ManageFoodBtn;
@@ -26,14 +28,14 @@ public class ChefView extends JFrame{
 		pageTitle.setBounds(160, 50, 200, 25);
 		contentPanel.add(pageTitle);
 		
-		viewAvailOrderBtn = new JButton("View Available Order");
+		viewAvailOrderBtn = new JButton("View Order Queue");
 		viewAvailOrderBtn.setBounds(160, 200, 300, 45);
 		viewAvailOrderBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				OrderQueueView oq = new OrderQueueView();
+				OrderHandler.getInstance().viewOrderQueue();
 			}
 		});
 		contentPanel.add(viewAvailOrderBtn);

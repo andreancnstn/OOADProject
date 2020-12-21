@@ -1,5 +1,6 @@
 package Main;
 
+import View.HistoryView;
 import View.OrderQueueView;
 import View.OrdersView;
 import View.TakenOrderView;
@@ -15,7 +16,7 @@ public class Main{
 //		UserInformationView uiv = new UserInformationView();
 //		uiv.setVisible(true);
 		
-		OrdersView ov = new OrdersView();
+//		OrdersView ov = new OrdersView();
 //		TakenOrderView tov = new TakenOrderView();
 //		OrderQueueView oqv = new OrderQueueView();
 		//xampp gw gabisa nge start mysql nya jadi ini blm di test

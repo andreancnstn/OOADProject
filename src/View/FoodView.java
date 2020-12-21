@@ -189,7 +189,6 @@ public class FoodView extends JFrame implements ActionListener{
 	}
 	
 	public void loadFoodData () {
-//		DatabaseConnection c = new DatabaseConnection();
 		String header[] = {"Food ID" , "Food Name", "Price", "Description", "Status"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		

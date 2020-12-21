@@ -57,7 +57,7 @@ public class ProfitView extends JFrame implements ActionListener{
 		homeBtn.addActionListener(this);
 		
 		table = new JTable();
-		loadProfit("SELECT * FROM tblorder WHERE status LIKE finished");
+		loadProfit("SELECT * FROM tblorder WHERE status LIKE 'finished'");
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		scrollPane.setBounds(0, 50, 600, 300);
@@ -94,7 +94,7 @@ public class ProfitView extends JFrame implements ActionListener{
 //			table.setModel(dtm);
 			
 		//KALAU VERSI RAW QUERY
-			loadProfit("SELECT * FROM tblorder WHERE status LIKE finished AND driverId =" + driverIdd);
+			loadProfit("SELECT * FROM tblorder WHERE status LIKE 'finished' AND driverId =" + driverIdd);
 		}
 		else if (e.getSource() == homeBtn) {
 			dispose();

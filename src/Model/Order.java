@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Vector;
 import Main.DatabaseConnection;
@@ -206,5 +207,31 @@ public class Order {
 		this.status = status;
 	}
 	
-
+	public Vector<Order> viewAllHistory(int id) {
+		Vector<Order> orders = new Vector<Order>();
+		Order o = null;
+		
+		c.resultSet = c.query("SELECT * FROM tblorder WHERE status LIKE 'Finished' AND driverId=" + id);
+	
+		try {
+			while(c.resultSet.next() == true) {
+				for (int i = 1; i <= c.metaData.getColumnCount(); i++) {
+					Integer orderid = c.resultSet.getInt("orderId");
+					Date date = c.resultSet.getDate("date");
+					String address = c.resultSet.getString("address");
+					Integer userid = c.resultSet.getInt("userId");
+					Integer driverid = c.resultSet.getInt("driverId");
+					String status = c.resultSet.getString("Status");
+					o = new Order(orderid, date, address, userid, driverid, status);
+				}
+				orders.add(o);
+			}
+			return orders;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

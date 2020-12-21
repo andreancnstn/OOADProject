@@ -14,7 +14,7 @@ import Controller.OrderHandler;
 
 public class DriverView extends JFrame{
 	JPanel contentPanel;
-	JButton viewAvailOrderBtn, OrderHistoryBtn;
+	JButton viewAvailOrderBtn, OrderHistoryBtn, viewHistoryBtn;
 	JLabel pageTitle;
 	
 	private Integer id;
@@ -45,14 +45,14 @@ public class DriverView extends JFrame{
 		});
 		contentPanel.add(viewAvailOrderBtn);
 		
-		OrderHistoryBtn = new JButton("Order History");
+		OrderHistoryBtn = new JButton("View Order History");
 		OrderHistoryBtn.setBounds(160, 260, 250, 45);
 		OrderHistoryBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				oh.viewAllHistory(id);
+				oh.viewHistory();
 			}
 		});
 		contentPanel.add(OrderHistoryBtn);

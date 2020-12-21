@@ -20,10 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.EmployeeHandler;
 import Controller.FoodHandler;
 import Controller.OrderHandler;
 import Main.DatabaseConnection;
 import Model.Order;
+import View.User.EmployeeLoginView;
 
 public class HistoryView extends JFrame implements ActionListener {
 
@@ -62,7 +64,7 @@ public class HistoryView extends JFrame implements ActionListener {
 		loadHistory();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 330);
+		scrollPane.setBounds(0, 50, 600, 330);
 		
 		panelBtn.add(viewDetailBtn);
 
@@ -96,7 +98,8 @@ public class HistoryView extends JFrame implements ActionListener {
 			DetailsView hdv = new DetailsView(ord);
 		}
 		else if (e.getSource() == homeBtn) {
-			//ini bisa berubah sesuai siapa yg akses ?
+			dispose();
+			new DriverView(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
 		}
 	}
 	
@@ -105,24 +108,19 @@ public class HistoryView extends JFrame implements ActionListener {
 	}
 	
 	public void loadHistory () {
-		DatabaseConnection c = new DatabaseConnection();
 		String header[] = {"Order ID" , "Date", "Address", "userId"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		
-		c.resultSet = c.query("SELECT * FROM tblorder WHERE status LIKE 'Finished'");
+		Vector<Order> v = OrderHandler.getInstance().viewAllHistory(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
 		
-		try {
-			while(c.resultSet.next() == true) {
-				v = new Vector<>();
-				for (int i = 1; i <= c.metaData.getColumnCount(); i++) {
-					v.add(c.resultSet.getObject(i));
-				}
-				dtm.addRow(v);
-			}
-			table.setModel(dtm);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (int i = 0; i < v.size(); i++) {
+			dtm.addRow(new Object[] {
+					v.get(i).getOrderId(),
+					v.get(i).getDate(),
+					v.get(i).getAddress(),
+					v.get(i).getUserId()
+			});
 		}
+		table.setModel(dtm);
 	}
 }

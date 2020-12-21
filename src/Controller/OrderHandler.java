@@ -13,6 +13,9 @@ import Model.Order;
 import Model.OrderDetail;
 import Model.User;
 import View.AvailableOrdersView;
+import View.HistoryView;
+import View.OrderQueueView;
+import View.ProfitView;
 
 public class OrderHandler {
 	Order o = new Order();
@@ -58,10 +61,10 @@ public class OrderHandler {
 		return o.getOne(orderId);
 	}
 	
-//	public List viewAllHistory(int id) {
-//		return null;
-//		
-//	}
+	public Vector<Order> viewAllHistory(int id) {
+		return o.viewAllHistory(id);
+	}
+	
 //	public List viewById(int orderId) {
 //		return null;
 //		
@@ -90,35 +93,33 @@ public class OrderHandler {
 //	public void viewTakenOrder() {
 //		
 //	}
-//	
+	
 //	private void viewDetails() {
 //		// TODO Auto-generated method stub
 //
 //	}
-//	
-//	private void viewHistory() {
-//		// TODO Auto-generated method stub
-//
-//	}
+	
+	public HistoryView viewHistory() {
+		return new HistoryView();
+	}
+	
 //	private void viewManageStatusForm() {
 //		// TODO Auto-generated method stub
 //
 //	}
-//	
-//	private void viewProfit() {
-//		// TODO Auto-generated method stub
-//
-//	}
-//	
+	
+	public ProfitView viewProfit() {
+		return new ProfitView();
+	}
+	
 //	public void filterDriver(int driverId) { //di class diagram ini dia return view 
 //		// TODO Auto-generated method stub
 //		
 //	}
-//	
-//	private void viewOrderQueue() {
-//		// TODO Auto-generated method stub
-//
-//	}
+	
+	public OrderQueueView viewOrderQueue() {
+		return new OrderQueueView();
+	}
 	
 	public void viewAvailableOrder(Integer id) {
 		AvailableOrdersView v = new AvailableOrdersView(id);
