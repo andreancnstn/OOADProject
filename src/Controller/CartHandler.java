@@ -31,6 +31,10 @@ public class CartHandler {
 		user = UserHandler.getInstance().getOne(email);
 	}
 	
+	public User getUserObj() {
+		return user;
+	}
+	
 	//add item to cart
 	public boolean addToCart(Integer foodId, Integer qty) {
 		if (qty < 0) {

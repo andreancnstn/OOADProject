@@ -35,7 +35,7 @@ public class OrderHandler {
 		long millis=System.currentTimeMillis();  
         java.sql.Date sqlDate=new java.sql.Date(millis);  
 
-		o.addOrder(user, sqlDate);
+		if (o.addOrder(user, sqlDate)) return true;
 		
 		return false;
 		
