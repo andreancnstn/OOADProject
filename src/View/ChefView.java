@@ -35,7 +35,7 @@ public class ChefView extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				// buat queue
+				OrderQueueView oq = new OrderQueueView();
 			}
 		});
 		contentPanel.add(viewAvailOrderBtn);

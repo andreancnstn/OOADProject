@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.CartHandler;
+import Controller.OrderHandler;
 import Model.Cart;
 import View.User.UserHomePageView;
 
@@ -129,6 +130,22 @@ public class CartView extends JFrame {
 		checkOut = new JButton("Check Out");
 		checkOut.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		checkOut.setBounds(541, 64, 100, 25);
+		checkOut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (OrderHandler.getInstance().addOrder(CartHandler.getInstance().getUserObj())) {
+					String message = "Success add order";
+					JOptionPane.showMessageDialog(checkOut, message);
+					loadData();
+				}
+				else {
+					String message = "failed add order";
+					JOptionPane.showMessageDialog(checkOut, message);
+				}
+			}
+		});
 		contentPane.add(checkOut);
 		
 		loadData();

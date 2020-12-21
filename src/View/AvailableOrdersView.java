@@ -30,7 +30,7 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 	JPanel panel1, panel, panelBtn, dialogBoxPanel;
 	JTable table;
 	JScrollPane scrollPane;
-	JButton takeOrderBtn;
+	JButton takeOrderBtn, homeBtn;
 	DefaultTableModel dtm;
 	JLabel orderIdLbl, judulLbl;
 	JTextField orderIdTxt;
@@ -54,16 +54,21 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 
 		takeOrderBtn = new JButton("Take Order");
 		takeOrderBtn.addActionListener(this);
+		
+		homeBtn = new JButton("HOME");
+		homeBtn.setBounds(20, 10, 100, 25);
+		homeBtn.addActionListener(this);
 
 		
 		table = new JTable();
 		loadAvailableOrders();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 330);
+		scrollPane.setBounds(0, 50, 600, 330);
 		
 		panelBtn.add(takeOrderBtn);
 
+		panel.add(homeBtn);
 		panel.add(scrollPane);
 		
 		init();
@@ -102,6 +107,7 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 			case 0: // TODO : orderhandler takeorder()
 				if (oh.takeOrder(Integer.parseInt(orderidd), driverId)){ //TODO: agar '2' nya diganti driverId yang nerima order.. how..
 					displayMsg("Order succesfully taken!");
+					loadAvailableOrders();
 				}
 				//TODO user handler method
 				//   uh.viewUserInformation();
@@ -110,6 +116,10 @@ public class AvailableOrdersView extends JFrame implements ActionListener {
 				loadAvailableOrders();
 				break;
 			}
+		}
+		else if (e.getSource() == homeBtn) {
+			dispose();
+			DriverView dv = new DriverView(driverId);
 		}
 		
 	}
