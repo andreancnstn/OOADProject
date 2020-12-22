@@ -221,7 +221,7 @@ public class UserHomePageView extends JFrame {
 	}
 
 	private void loadData() {
-		item = new FoodHandler().viewAll();
+		item = new FoodHandler().viewMenuList();
 		String[] header = {"Food ID" , "Food Name", "Price", "Description"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		

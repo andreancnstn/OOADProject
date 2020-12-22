@@ -23,7 +23,7 @@ public class ChefView extends JFrame{
 		setContentPane(contentPanel);
 		contentPanel.setLayout(null);
 		
-		pageTitle = new JLabel("Driver Main Menu");
+		pageTitle = new JLabel("Chef Main Menu");
 		pageTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		pageTitle.setBounds(160, 50, 200, 25);
 		contentPanel.add(pageTitle);
@@ -56,7 +56,7 @@ public class ChefView extends JFrame{
 	}
 
 	private void init() {
-		setTitle("Manager Menu");
+		setTitle("Chef Menu");
 		setVisible(true);
 		setSize(600,600);
 		setLocationRelativeTo(null);

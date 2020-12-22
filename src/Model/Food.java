@@ -82,11 +82,11 @@ public class Food {
 	
 	public boolean changeStatus(int foodId) {
 		Food f = getFood(foodId);
-		if (f.getStatus().equals("Available")) {
+		if (f.getStatus().equals("available")) {
 			c.update("UPDATE food SET status='Not available' WHERE foodId=" + foodId);
 		}
 		else if (f.getStatus().equals("Not available")) {
-			c.update("UPDATE food SET status='Available' WHERE foodId=" + foodId);
+			c.update("UPDATE food SET status='available' WHERE foodId=" + foodId);
 		}
 		return true;
 	}
@@ -143,6 +143,32 @@ public class Food {
 	}
 
 	public Vector<Food> viewAll() {
+		Vector<Food> v = new Vector<Food>();
+		Food f = null;
+		
+		c.resultSet = c.query("SELECT * FROM food");
+		
+		try {
+			while(c.resultSet.next() == true) {
+				for (int i = 0; i <= c.metaData.getColumnCount(); i++) {
+					int foodId = c.resultSet.getInt(1);
+					String name = c.resultSet.getString(2).toString();
+					int price = c.resultSet.getInt(3);
+					String desc = c.resultSet.getString(4);
+					String status = c.resultSet.getString(5);
+					f = new Food(foodId, name, price, desc, status);
+				}
+				v.add(f);
+			}
+			return v;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		return null;
+	}
+	
+	public Vector<Food> viewMenu() {
 		Vector<Food> v = new Vector<Food>();
 		Food f = null;
 		

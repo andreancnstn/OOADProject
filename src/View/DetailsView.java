@@ -63,7 +63,7 @@ public class DetailsView extends JFrame implements ActionListener {
 		loadHistoryDetail();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(0, 20, 600, 330);
+		scrollPane.setBounds(0, 50, 600, 330);
 		
 		homeBtn = new JButton("HOME");
 		homeBtn.setBounds(20, 10, 100, 25);

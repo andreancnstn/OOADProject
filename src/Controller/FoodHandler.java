@@ -25,6 +25,12 @@ public class FoodHandler {
 		
 		return v;
 	}
+	
+	public Vector<Food> viewMenuList() {
+		Vector<Food> v = fModel.viewMenu();
+		
+		return v;
+	}
 
 	public boolean addFood(String name, int price, String desc) {
 		
