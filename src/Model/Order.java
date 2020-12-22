@@ -211,7 +211,7 @@ public class Order {
 		Vector<Order> orders = new Vector<Order>();
 		Order o = null;
 		
-		c.resultSet = c.query("SELECT * FROM tblorder WHERE status LIKE 'Finished' AND driverId=" + id);
+		c.resultSet = c.query("SELECT * FROM tblorder WHERE status LIKE 'Finished' AND driverId=" + new Driver().getDriverId(id));
 	
 		try {
 			while(c.resultSet.next() == true) {

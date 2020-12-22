@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.CartHandler;
 import Controller.FoodHandler;
+import Controller.UserHandler;
 import Model.Food;
 import View.OrdersView;
 

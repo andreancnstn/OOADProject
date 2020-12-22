@@ -26,6 +26,7 @@ import Controller.OrderHandler;
 import Main.DatabaseConnection;
 import Model.Order;
 import View.User.EmployeeLoginView;
+import View.User.UserHomePageView;
 
 public class DetailsView extends JFrame implements ActionListener {
 
@@ -86,7 +87,7 @@ public class DetailsView extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == homeBtn) {
 			dispose();
-			new DriverView(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
+			new UserHomePageView().setVisible(true);
 		}
 	}
 	

@@ -137,6 +137,10 @@ public class CartView extends JFrame {
 				// TODO Auto-generated method stub
 				if (OrderHandler.getInstance().addOrder(CartHandler.getInstance().getUserObj())) {
 					OrderHandler.getInstance().addDetail(OrderHandler.getInstance().getOrderIdAfterAdd(), Integer.parseInt(idValue.getText()), Integer.parseInt(qtyTxt.getText()));
+					
+					Integer foodId = Integer.parseInt(idValue.getText());
+					CartHandler.getInstance().removeFromCart(foodId);
+					
 					String message = "Success add order";
 					JOptionPane.showMessageDialog(checkOut, message);
 					loadData();

@@ -46,7 +46,7 @@ public class DriverView extends JFrame{
 		contentPanel.add(viewAvailOrderBtn);
 		
 		OrderHistoryBtn = new JButton("View Order History");
-		OrderHistoryBtn.setBounds(160, 260, 250, 45);
+		OrderHistoryBtn.setBounds(160, 260, 300, 45);
 		OrderHistoryBtn.addActionListener(new ActionListener() {
 			
 			@Override

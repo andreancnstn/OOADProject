@@ -98,7 +98,7 @@ public class ProfitView extends JFrame implements ActionListener{
 		}
 		else if (e.getSource() == homeBtn) {
 			dispose();
-			ChefView cv = new ChefView();
+			new ManagerView();
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class ProfitView extends JFrame implements ActionListener{
 	
 	public void  loadProfit (String que) {
 		DatabaseConnection c = new DatabaseConnection();
-		String header[] =  {"Order ID" , "Date", "Address", "userId"};
+		String header[] =  {"Order ID" , "Date", "Address", "userId", "driverId"};
 		DefaultTableModel dtm = new DefaultTableModel(header, 0);
 		
 		c.resultSet = c.query(que);

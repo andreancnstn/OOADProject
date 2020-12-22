@@ -26,7 +26,7 @@ public class LoginView extends JFrame {
 	private JPanel contentPane;
 	private JTextField emailTxt;
 	private JPasswordField passwordTxt;
-
+	public static String email1;
 
 	public LoginView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +72,7 @@ public class LoginView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String email = emailTxt.getText();
 				String password = passwordTxt.getText();
-				
+				email1 = email;
 				Boolean validation = UserHandler.getInstance().validateAccount(email, password);
 				
 				if (validation == true) {

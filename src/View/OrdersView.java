@@ -22,8 +22,10 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.FoodHandler;
 import Controller.OrderHandler;
+import Controller.UserHandler;
 import Main.DatabaseConnection;
 import Model.Order;
+import View.User.LoginView;
 import View.User.UserHomePageView;
 
 public class OrdersView extends JFrame implements ActionListener {
@@ -76,7 +78,7 @@ public class OrdersView extends JFrame implements ActionListener {
 		homeBtn.addActionListener(this);
 		
 		table = new JTable();
-		loadEntries("SELECT * FROM tblorder");
+		loadEntries("SELECT * FROM tblorder WHERE userId=" + UserHandler.getInstance().getOne(LoginView.email1).getId());
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		scrollPane.setBounds(0, 50, 600, 330);
@@ -106,7 +108,7 @@ public class OrdersView extends JFrame implements ActionListener {
 		dialogBoxPanel = new JPanel();
 		if (e.getSource() == FilterFinishedOrderBtn) {
 //			TODO yg skrg masih pakai raw query, blm pakai OrderHandler samsek
-			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Finished'"); //WHERE userId = CURRENT USER ID
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Finished' AND userId=" + UserHandler.getInstance().getOne(LoginView.email1).getId()); //WHERE userId = CURRENT USER ID
 			
 
 //			harusnya kayak gw comment ini
@@ -116,7 +118,7 @@ public class OrdersView extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == FilterActiveOrderBtn) {
 			//TODO ini juga masih pakai raw query, blm pakai OrderHandler samsek
-			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+			loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted' AND userId=" + UserHandler.getInstance().getOne(LoginView.email1).getId());
 			
 			
 			FilterActiveOrderBtn.setVisible(false);
@@ -148,13 +150,13 @@ public class OrdersView extends JFrame implements ActionListener {
 				FilterActiveOrderBtn.setVisible(true);
 				FilterFinishedOrderBtn.setVisible(true);
 				cancelBtn.setVisible(false);
-				loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+				loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted' AND userId=" + UserHandler.getInstance().getOne(LoginView.email1).getId());
 				break;
 			case 1:
 				FilterActiveOrderBtn.setVisible(true);
 				FilterFinishedOrderBtn.setVisible(true);
 				cancelBtn.setVisible(false);
-				loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted'");
+				loadEntries("SELECT * FROM tblorder WHERE status LIKE 'Not Accepted' AND userId=" + UserHandler.getInstance().getOne(LoginView.email1).getId());
 				break;
 			}
 		}
