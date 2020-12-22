@@ -61,7 +61,7 @@ public class DriverView extends JFrame{
 	}
 
 	private void init() {
-		setTitle("Manager Menu");
+		setTitle("Chef Menu");
 		setVisible(true);
 		setSize(600,600);
 		setLocationRelativeTo(null);
