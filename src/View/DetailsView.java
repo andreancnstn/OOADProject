@@ -39,13 +39,19 @@ public class DetailsView extends JFrame implements ActionListener {
 	JLabel orderIdLbl, judulLbl;
 	JTextField orderIdTxt;
 	Vector<Object> v;
+	Integer page;
 	
 	
 	Order ord = null;
 	
-	public DetailsView(Order ord) throws HeadlessException {
+	/*
+	 * legend x
+	 * 1 = driver
+	 * 2 = cust
+	 */
+	public DetailsView(Order ord, int x) throws HeadlessException {
 		this.ord = ord;
-		
+		this.page = x;
 		// TODO Auto-generated constructor stub
 		panel1 = new JPanel();
 		panel1.setLayout(new BorderLayout(0,0));
@@ -86,8 +92,14 @@ public class DetailsView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == homeBtn) {
-			dispose();
-			new UserHomePageView().setVisible(true);
+			if (page == 1) {
+				dispose();
+				new DriverView(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
+			}
+			else if (page == 2) {
+				dispose();
+				new UserHomePageView().setVisible(true);
+			}
 		}
 	}
 	

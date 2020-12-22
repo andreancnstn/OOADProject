@@ -95,10 +95,10 @@ public class HistoryView extends JFrame implements ActionListener {
 			String orderidd = "" + table.getValueAt(row, 0);
 			
 			Order ord = oh.getOne(Integer.parseInt(orderidd));
-			DetailsView hdv = new DetailsView(ord);
+			DetailsView hdv = new DetailsView(ord, 1);
 		}
 		else if (e.getSource() == homeBtn) {
-			dispose();
+			this.dispose();
 			new DriverView(EmployeeHandler.getInstance().getLogedinEmpId(EmployeeLoginView.empEmail));
 		}
 	}
